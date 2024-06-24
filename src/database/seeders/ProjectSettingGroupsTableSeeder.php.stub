@@ -1,0 +1,47 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class ProjectSettingGroupsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        ProjectSettingGroupsSeeder::seedGroups([
+            [
+                'slug' => 'group-one',
+                'is_visible' => true,
+                'translations' => [
+                    'en' => [
+                        'name' => 'Group1',
+                        'description' => 'description1',
+                    ],
+                    'ar' => [
+                        'name' => 'مجموعة1',
+                        'description' => 'وصف1',
+                    ],
+                ],
+            ],
+            [
+                'slug' => 'group-two',
+                'is_visible' => true,
+                'translations' => [
+                    'en' => [
+                        'name' => 'Group2',
+                        'description' => 'description2',
+                    ],
+                    'ar' => [
+                        'name' => 'مجموعة2',
+                        'description' => 'وصف2',
+                    ],
+                ],
+            ],
+        ]);
+    }
+}

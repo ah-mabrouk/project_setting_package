@@ -1,0 +1,40 @@
+{
+    "name": "mabrouk/project-setting",
+    "description": "a laravel package to handle dealing with project setting in groups",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Mabrouk",
+            "email": "a.mabrouk25@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": "^9",
+        "mabrouk/translatable": "^1",
+        "mabrouk/filterable": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mabrouk\\ProjectSetting\\ProjectSettingServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mabrouk\\ProjectSetting\\": "src/",
+            "Database\\Factories\\": "src/database/factories/",
+            "Database\\Seeders\\": "src/database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}

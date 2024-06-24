@@ -1,0 +1,90 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Database\Seeders\ProjectSettingSectionsWithItemsSeeder;
+
+class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        ProjectSettingSectionsWithItemsSeeder::seedSections([
+            [
+                'group_slug' => 'group-one',
+                'translations' => [
+                    'en' => [
+                        'name' => 'section one',
+                        'description' => 'description one',
+                    ],
+                    'ar' => [
+                        'name' => 'القطاع الأول',
+                        'description' => 'الوصف الأول',
+                    ],
+                ],
+                'settings' => [
+                    'type_name' => 'type1',
+                    'key' => 'setting1',
+                    'non_translatable_value' => 5,
+                    'custom_validation_rules' => 'required|integer|min:3|max:15',
+                    'is_visible' => true,
+                    'is_editable' => true,
+                    'is_return_to_client' => true,
+
+                    'translations' => [
+                        'en' => [
+                            'name' => 'name example1',
+                            'description' => 'description example1',
+                            'key_value' => 'value example1',
+                        ],
+                        'ar' => [
+                            'name' => 'مثال الاسم1',
+                            'description' => 'مثال الوصف1',
+                            'key_value' => 'مثال القيمة1',
+                        ],
+                    ]
+                ],
+            ],
+            [
+                'group_slug' => 'group-two',
+                'translations' => [
+                    'en' => [
+                        'name' => 'section two',
+                        'description' => 'description two',
+                    ],
+                    'ar' => [
+                        'name' => 'القطاع الثاني',
+                        'description' => 'الوصف الثاني',
+                    ],
+                ],
+                'settings' => [
+                    'type_name' => 'type2',
+                    'key' => 'setting1',
+                    'non_translatable_value' => 5,
+                    'custom_validation_rules' => 'required|integer|min:3|max:15',
+                    'is_visible' => true,
+                    'is_editable' => true,
+                    'is_return_to_client' => true,
+
+                    'translations' => [
+                        'en' => [
+                            'name' => 'name example2',
+                            'description' => 'description example2',
+                            'key_value' => 'value example2',
+                        ],
+                        'ar' => [
+                            'name' => 'مثال الاسم2',
+                            'description' => 'مثال الوصف2',
+                            'key_value' => 'مثال القيمة2',
+                        ],
+                    ]
+                ],
+            ],
+        ]);
+    }
+}
