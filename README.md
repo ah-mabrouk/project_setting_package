@@ -36,7 +36,7 @@ You can install the package using composer.
 composer install mabrouk/project-setting
 ```
 
-* Now you need to run the following ```command``` in order to migrate package tables and publish ```permissions.php``` config file to config directory
+* Now you need to run the following ```command``` in order to migrate package tables and publish ```project_settings.php``` config file to config directory
 
 ```bash
 php artisan setting:install
