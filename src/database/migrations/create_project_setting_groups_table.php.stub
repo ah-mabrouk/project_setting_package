@@ -17,7 +17,7 @@ class CreateProjectSettingGroupsTable extends Migration
             $table->id();
             $table->string('slug)->unique();
 
-            $table->boolean('is_visible)->default(true);
+            $table->boolean('is_visible')->default(true);
 
             $table->timestamps();
         });
