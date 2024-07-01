@@ -97,15 +97,15 @@ class ProjectSettingInstallCommand extends Command
 
     private function migratePackageTables()
     {
-        if (! \is_array(config('project_settings.database_connections'))) abort(500, 'wrong config key value data type. "project_settings.database_connections" key should return an array');
+        if (! \is_array(config('project_settings.db_connections'))) abort(500, 'wrong config key value data type. "project_settings.db_connections" key should return an array');
 
         $migrationSubFolder = config('project_settings.migration_sub_folder') != '' ? config('project_settings.migration_sub_folder') . '/' : '';
 
-        if (\count(config('project_settings.database_connections')) == 0) return $this->migrateToDatabaseConnection($migrationSubFolder);
+        if (\count(config('project_settings.db_connections')) == 0) return $this->migrateToDatabaseConnection($migrationSubFolder);
 
         $currentConnectionDriver = DB::connection()->getPdo()?->getAttribute(\PDO::ATTR_DRIVER_NAME) ?? config('database.default');
 
-        foreach (config('project_settings.database_connections') as $databaseConnectionName) {
+        foreach (config('project_settings.db_connections') as $databaseConnectionName) {
             $this->migrateToDatabaseConnection($migrationSubFolder, $databaseConnectionName);
         }
 
