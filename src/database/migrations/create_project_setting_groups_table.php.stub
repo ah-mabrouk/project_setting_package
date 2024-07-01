@@ -15,7 +15,7 @@ class CreateProjectSettingGroupsTable extends Migration
     {
         Schema::create('project_setting_groups', function (Blueprint $table) {
             $table->id();
-            $table->string('slug)->unique();
+            $table->string('slug')->unique();
 
             $table->boolean('is_visible')->default(true);
 
