@@ -33,7 +33,7 @@ mabrouk/project-setting is a Laravel api package for dealing with project settin
 You can install the package using composer.
 
 ```bash
-composer install mabrouk/project-setting
+composer require mabrouk/project-setting
 ```
 
 * Now you need to run the following ```command``` in order to migrate package tables and publish ```project_settings.php``` config file to config directory
