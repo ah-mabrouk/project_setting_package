@@ -40,3 +40,18 @@ if (! function_exists('pagination_length')) {
         return (int) $length;
     }
 }
+
+if (!function_exists('format_json_strings_to_boolean')) {
+    function format_json_strings_to_boolean(array $fields, bool $includeBooleanPrefix = true)
+    {
+        $prefix = $includeBooleanPrefix ? 'is_' : '';
+        $fieldsToBeMerged = [];
+        for ($i = 0; $i < \count($fields); $i++) {
+            $field = $fields[$i];
+            if (request()->exists($field)) {
+                $fieldsToBeMerged["{$prefix}{$field}"] = \gettype(request()->$field) == 'string' ? (bool) \json_decode(request()->$field) : request()->$field;
+            }
+        }
+        return $fieldsToBeMerged;
+    }
+}

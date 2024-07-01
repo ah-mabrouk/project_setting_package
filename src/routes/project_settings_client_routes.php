@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mabrouk\ProjectSetting\Http\Controllers\Client\ProjectSettingController;
 // use Mabrouk\ProjectSetting\Http\Controllers\Client\ProjectSettingTypeController;
 // use Mabrouk\ProjectSetting\Http\Controllers\Client\ProjectSettingGroupController;
 // use Mabrouk\ProjectSetting\Http\Controllers\Client\ProjectSettingSectionController;

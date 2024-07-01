@@ -4,6 +4,7 @@ namespace Mabrouk\ProjectSetting\Http\Controllers\Client;
 
 use Mabrouk\ProjectSetting\Models\ProjectSetting;
 use Mabrouk\ProjectSetting\Http\Controllers\Controller;
+use Mabrouk\ProjectSetting\Filters\Client\ProjectSettingFilter;
 use Mabrouk\ProjectSetting\Http\Resources\Client\ProjectSettingResource;
 
 class ProjectSettingController extends Controller
@@ -11,7 +12,7 @@ class ProjectSettingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Filters\Client\ProjectSettingSectionFilter  $filters
+     * @param  \Mabrouk\ProjectSetting\Filters\Client\ProjectSettingFilter  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingFilter $filters)

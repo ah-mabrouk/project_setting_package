@@ -38,25 +38,25 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
             if (! $sectionGroup) continue;
 
             $projectSettingSection = $sectionGroup->projectSettingSections()->create($projectSettingSections[$i]);
-            self::addModelTranslation($projectSettingSection, $projectSettingSections[$i]['translations']);
+            self::addProjectSettingTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
             self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $projectSettingSections[$i]['settings']);
         }
     }
 
-    protected static function addSectionSettings(Collection $allProjectSettingTypes, ProjectSettingSection $projectSettingSection, array $settings)
+    protected static function addSectionSettings(Collection $allProjectSettingTypes, ProjectSettingSection $projectSettingSection, array $projectSettings)
     {
-        foreach ($settings as $settingsData) {
-            $settingType = $allProjectSettingTypes->where('name', $settingsData['type_name'])->first();
+        foreach ($projectSettings as $projectSettingData) {
+            $settingType = $allProjectSettingTypes->where('name', $projectSettingData['type_name'])->first();
 
             if (! $settingType) continue;
 
             $setting = $projectSettingSection->projectSettings()
-                ->create(\array_merge(['project_setting_type_id' => $settingType->id], $settingsData));
-            self::addModelTranslation($setting, $settingsData['translations']);
+                ->create(\array_merge(['project_setting_type_id' => $settingType->id], $projectSettingData));
+            self::addProjectSettingTranslation($setting, $projectSettingData['translation_data']);
         }
     }
 
-    protected static function addModelTranslation(Model $projectSettingSection, array $translations)
+    protected static function addProjectSettingTranslation(Model $projectSettingSection, array $translations)
     {
         foreach ($translations as $locale => $translationData) {
             $projectSettingSection->translate($translationData, $locale);
@@ -67,9 +67,12 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
     {
         if (ProjectSettingSection::count() == 0) return true;
 
-        $confirmPurgeCurrentData = (new Command())->confirm('this action will purge the current sections and settings keys and fill it with the seeder data. do you wish to continue?', false);
+        $confirmPurgeCurrentData = (new Command())->confirm('this action will purge the current sections and settings keys and fill it with the seeder default data. do you wish to continue?', false);
 
-        if (! $confirmPurgeCurrentData) return false;
+        if (! $confirmPurgeCurrentData) {
+            (new Command())->info('no data seeded.');
+            return false;
+        }
 
         ProjectSettingSection::truncate();
         ProjectSettingSectionTranslation::truncate();

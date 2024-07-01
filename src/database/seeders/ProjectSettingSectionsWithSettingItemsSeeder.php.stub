@@ -17,7 +17,7 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
         ProjectSettingSectionsWithItemsSeeder::seedSections([
             [
                 'group_slug' => 'group-one',
-                'translations' => [
+                'translation_data' => [
                     'en' => [
                         'name' => 'section one',
                         'description' => 'description one',
@@ -36,7 +36,7 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                     'is_editable' => true,
                     'is_return_to_client' => true,
 
-                    'translations' => [
+                    'translation_data' => [
                         'en' => [
                             'name' => 'name example1',
                             'description' => 'description example1',
@@ -52,7 +52,7 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
             ],
             [
                 'group_slug' => 'group-two',
-                'translations' => [
+                'translation_data' => [
                     'en' => [
                         'name' => 'section two',
                         'description' => 'description two',
@@ -71,7 +71,7 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                     'is_editable' => true,
                     'is_return_to_client' => true,
 
-                    'translations' => [
+                    'translation_data' => [
                         'en' => [
                             'name' => 'name example2',
                             'description' => 'description example2',

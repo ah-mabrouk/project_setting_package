@@ -34,6 +34,11 @@ class ProjectSetting extends Model
         'projectSettingType',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'key';
+    }
+
     ## Relations
 
     public function projectSettingType()

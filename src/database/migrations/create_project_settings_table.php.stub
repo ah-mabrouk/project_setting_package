@@ -18,7 +18,7 @@ class CreateSubProjectSettingsTable extends Migration
             $table->unsignedBigInteger('project_setting_section_id');
             $table->unsignedBigInteger('project_setting_type_id');
 
-            $table->string('key')->index();
+            $table->string('key')->unique();
             $table->text('non_translatable_value')->nullable();
             $table->text('custom_validation_rules');
 

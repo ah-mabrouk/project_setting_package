@@ -25,6 +25,7 @@ class ProjectSettingSectionUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'project_setting_group' => 'sometimes|integer|exists:project_setting_groups,id',
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
         ];
@@ -33,7 +34,9 @@ class ProjectSettingSectionUpdateRequest extends FormRequest
     public function storeProjectSettingSection()
     {
         DB::transaction(function () {
-            $this->project_setting_section->update();
+            $this->project_setting_section->update([
+                'project_setting_group_id' => $this->exists('project_setting_group') ? $this->project_setting_group : $this->project_setting_section->project_setting_group_id,
+            ]);
         });
         return $this->project_setting_section->refresh();
     }
