@@ -2,11 +2,11 @@
 
 namespace Mabrouk\ProjectSetting;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingInstallCommand;
+use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingTypeUpdateCommand;
 
 class ProjectSettingServiceProvider extends ServiceProvider
 {
@@ -50,7 +50,7 @@ class ProjectSettingServiceProvider extends ServiceProvider
 
             $this->commands([
                 ProjectSettingInstallCommand::class,
-                // ProjectSettingTypeUpdateCommand::class,
+                ProjectSettingTypeUpdateCommand::class,
             ]);
 
             /**

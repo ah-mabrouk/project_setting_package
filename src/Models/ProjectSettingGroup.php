@@ -32,6 +32,11 @@ class ProjectSettingGroup extends Model
         return $this->hasMany(ProjectSettingSection::class, 'project_setting_group_id');
     }
 
+    public function projectSettings()
+    {
+        return $this->hasManyThrough(ProjectSetting::class, ProjectSettingSection::class, 'project_setting_group_id', 'project_setting_section_id');
+    }
+
     ## Getters & Setters
 
     ## Query Scope Methods

@@ -18,7 +18,7 @@ class ProjectSettingFilter extends QueryFilter
 
     public function of_section($sectionId = '')
     {
-        return \is_int($sectionId) ? $this->builder->ofType($sectionId) : $this->builder;
+        return \is_int($sectionId) ? $this->builder->ofSection($sectionId) : $this->builder;
     }
 
     public function search($search = '')
