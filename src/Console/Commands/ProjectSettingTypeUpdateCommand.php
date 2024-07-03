@@ -13,7 +13,7 @@ class ProjectSettingTypeUpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'setting:types-update';
+    protected $signature = 'setting:types-update ?{--existing_types}';
 
     public Collection $existingProjectSettingTypesData;
 
@@ -29,9 +29,9 @@ class ProjectSettingTypeUpdateCommand extends Command
      *
      * @return void
      */
-    public function __construct(array $existingProjectSettingTypesData = [])
+    public function __construct(array $existing_types = [])
     {
-        $this->existingProjectSettingTypesData = collect($existingProjectSettingTypesData);
+        $this->existingProjectSettingTypesData = collect($existing_types);
         parent::__construct();
     }
 

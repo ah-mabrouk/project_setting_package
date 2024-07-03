@@ -45,6 +45,6 @@ class ProjectSettingTypesTableSeeder extends Seeder
 
     protected function updateExistingProjectSettingTypes(array $existingTypes = [])
     {
-        if (\count($existingTypes) > 0) Artisan::call('setting:types-update', $existingTypes);
+        if (\count($existingTypes) > 0) Artisan::call('setting:types-update', ['--existing_types' => $existingTypes]);
     }
 }
