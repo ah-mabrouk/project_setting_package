@@ -19,6 +19,12 @@ class ProjectSettingGroup extends Model
     protected $fillable = [
         'id',
         'slug',
+
+        'is_visible',
+    ];
+
+    protected $casts = [
+        'is_visible' => 'boolean',
     ];
 
     public function getRouteKeyName()

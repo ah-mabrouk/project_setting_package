@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -27,17 +26,21 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
     public static function seedSections(array $projectSettingSections)
     {
-        if (! self::purgeCurrentSections()) return;
+        if (!self::purgeCurrentSections()) return;
 
         $allProjectSettingTypes = ProjectSettingType::all();
         $allProjectSettingGroups = ProjectSettingGroup::all();
+        $fillableAttributes = (new ProjectSettingSection())->getFillable();
 
         for ($i = 0; $i < \count($projectSettingSections); $i++) {
             $sectionGroup = $allProjectSettingGroups->where('slug', $projectSettingSections[$i]['group_slug'])->first();
 
-            if (! $sectionGroup) continue;
+            if (!$sectionGroup) continue;
 
-            $projectSettingSection = $sectionGroup->projectSettingSections()->create($projectSettingSections[$i]);
+            $projectSettingSection = $sectionGroup->projectSettingSections()->create(
+                self::filteredFillableProjectSettingSectionObjectData($fillableAttributes, $projectSettingSections[$i])
+            );
+
             self::addProjectSettingTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
             self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $projectSettingSections[$i]['settings']);
         }
@@ -45,13 +48,20 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
     protected static function addSectionSettings(Collection $allProjectSettingTypes, ProjectSettingSection $projectSettingSection, array $projectSettings)
     {
+        $fillableAttributes = (new ProjectSetting())->getFillable();
+
         foreach ($projectSettings as $projectSettingData) {
             $settingType = $allProjectSettingTypes->where('name', $projectSettingData['type_name'])->first();
 
-            if (! $settingType) continue;
+            if (!$settingType) continue;
 
             $setting = $projectSettingSection->projectSettings()
-                ->create(\array_merge(['project_setting_type_id' => $settingType->id], $projectSettingData));
+                ->create(
+                    \array_merge(
+                        ['project_setting_type_id' => $settingType->id],
+                        self::filteredFillableProjectSettingObjectData($fillableAttributes, $projectSettingData)
+                    )
+                );
             self::addProjectSettingTranslation($setting, $projectSettingData['translation_data']);
         }
     }
@@ -65,20 +75,33 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
     protected static function purgeCurrentSections(): bool
     {
-        if (ProjectSettingSection::count() == 0) return true;
-
-        $confirmPurgeCurrentData = (new Command())->confirm('this action will purge the current sections and settings keys and fill it with the seeder default data. do you wish to continue?', false);
-
-        if (! $confirmPurgeCurrentData) {
-            (new Command())->info('no data seeded.');
-            return false;
-        }
-
         ProjectSettingSection::truncate();
         ProjectSettingSectionTranslation::truncate();
         ProjectSetting::truncate();
         ProjectSettingTranslation::truncate();
 
         return true;
+    }
+
+    protected static function filteredFillableProjectSettingSectionObjectData(array $fillables, array $projectSettingSectionData): array
+    {
+        return \array_filter(
+            $projectSettingSectionData,
+            function ($attribute) use ($fillables) {
+                return \in_array($attribute, $fillables);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+    }
+
+    protected static function filteredFillableProjectSettingObjectData(array $fillables, array $projectSettingData): array
+    {
+        return \array_filter(
+            $projectSettingData,
+            function ($attribute) use ($fillables) {
+                return \in_array($attribute, $fillables);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
     }
 }

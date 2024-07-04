@@ -28,26 +28,28 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                     ],
                 ],
                 'settings' => [
-                    'type_name' => 'type1',
-                    'key' => 'setting1',
-                    'non_translatable_value' => 5,
-                    'custom_validation_rules' => 'required|integer|min:3|max:15',
-                    'is_visible' => true,
-                    'is_editable' => true,
-                    'is_return_to_client' => true,
+                    [
+                        'type_name' => 'type1',
+                        'key' => 'setting1',
+                        'non_translatable_value' => 5,
+                        'custom_validation_rules' => 'required|integer|min:3|max:15',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
 
-                    'translation_data' => [
-                        'en' => [
-                            'name' => 'name example1',
-                            'description' => 'description example1',
-                            'key_value' => 'value example1',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example1',
+                                'description' => 'description example1',
+                                'key_value' => 'value example1',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم1',
+                                'description' => 'مثال الوصف1',
+                                'key_value' => 'مثال القيمة1',
+                            ],
                         ],
-                        'ar' => [
-                            'name' => 'مثال الاسم1',
-                            'description' => 'مثال الوصف1',
-                            'key_value' => 'مثال القيمة1',
-                        ],
-                    ]
+                    ],
                 ],
             ],
             [
@@ -63,26 +65,28 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                     ],
                 ],
                 'settings' => [
-                    'type_name' => 'type2',
-                    'key' => 'setting1',
-                    'non_translatable_value' => 5,
-                    'custom_validation_rules' => 'required|integer|min:3|max:15',
-                    'is_visible' => true,
-                    'is_editable' => true,
-                    'is_return_to_client' => true,
+                    [
+                        'type_name' => 'type2',
+                        'key' => 'setting2',
+                        'non_translatable_value' => 5,
+                        'custom_validation_rules' => 'required|integer|min:3|max:15',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
 
-                    'translation_data' => [
-                        'en' => [
-                            'name' => 'name example2',
-                            'description' => 'description example2',
-                            'key_value' => 'value example2',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example2',
+                                'description' => 'description example2',
+                                'key_value' => 'value example2',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم2',
+                                'description' => 'مثال الوصف2',
+                                'key_value' => 'مثال القيمة2',
+                            ],
                         ],
-                        'ar' => [
-                            'name' => 'مثال الاسم2',
-                            'description' => 'مثال الوصف2',
-                            'key_value' => 'مثال القيمة2',
-                        ],
-                    ]
+                    ],
                 ],
             ],
         ]);
