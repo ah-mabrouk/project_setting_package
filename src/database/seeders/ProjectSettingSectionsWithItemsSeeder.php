@@ -63,7 +63,7 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
         }
     }
 
-    protected function purgeCurrentSections(): bool
+    protected static function purgeCurrentSections(): bool
     {
         if (ProjectSettingSection::count() == 0) return true;
 

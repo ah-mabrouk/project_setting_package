@@ -12,6 +12,7 @@ class ProjectSettingGroupTranslation extends Model
     protected $fillable = [
         'locale',
         'name',
+        'description',
     ];
 
     ## Relations

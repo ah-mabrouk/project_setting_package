@@ -13,6 +13,7 @@ class ProjectSettingGroup extends Model
 
     public $translatedAttributes = [
         'name',
+        'description',
     ];
 
     protected $fillable = [
