@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\ProjectSettingGroupsSeeder;
 
 class ProjectSettingGroupsTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class ProjectSettingGroupsTableSeeder extends Seeder
             [
                 'slug' => 'group-one',
                 'is_visible' => true,
-                'translations' => [
+                'translation_data' => [
                     'en' => [
                         'name' => 'Group1',
                         'description' => 'description1',
@@ -31,7 +32,7 @@ class ProjectSettingGroupsTableSeeder extends Seeder
             [
                 'slug' => 'group-two',
                 'is_visible' => true,
-                'translations' => [
+                'translation_data' => [
                     'en' => [
                         'name' => 'Group2',
                         'description' => 'description2',

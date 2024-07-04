@@ -24,7 +24,7 @@ class ProjectSettingGroupsSeeder extends Seeder
         for ($i = 0; $i < \count($projectSettingGroups); $i++) {
             if (! \in_array($projectSettingGroups[$i]['slug'], $currentProjectSettingGroupsInTable)) {
                 $projectSettingGroup = ProjectSettingGroup::create($projectSettingGroups[$i]);
-                self::addGroupTranslation($projectSettingGroup, $projectSettingGroups[$i]['translations']);
+                self::addGroupTranslation($projectSettingGroup, $projectSettingGroups[$i]['translation_data']);
             }
         }
     }
