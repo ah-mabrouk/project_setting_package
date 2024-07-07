@@ -22,7 +22,7 @@ class ProjectSettingResource extends JsonResource
 
             'name' => $this->name,
             'description' => $this->description,
-            'value' => $this->actualValue,
+            'value' => $this->value,
 
             'translatable' => $this->isTranslatable,
 
