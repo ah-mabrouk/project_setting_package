@@ -4,7 +4,7 @@ namespace Mabrouk\ProjectSetting\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectSettingSectionResource extends JsonResource
+class ProjectSettingSimpleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,18 @@ class ProjectSettingSectionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'key' => $this->key,
+
+            'validation_rule' => $this->ValidationRule,
 
             'name' => $this->name,
             'description' => $this->description,
+            'value' => $this->value,
 
-            'project_setting_group' => new ProjectSettingGroupSimpleResource($this->projectSettingGroup),
-            'project_settings' => ProjectSettingSimpleResource::collection($this->projectSettings),
+            'translatable' => $this->isTranslatable,
+
+            'type' => new ProjectSettingTypeResource($this->projectSettingType),
+            'section' => new ProjectSettingSectionSimpleResource($this->projectSettingSection),
         ];
     }
 }
