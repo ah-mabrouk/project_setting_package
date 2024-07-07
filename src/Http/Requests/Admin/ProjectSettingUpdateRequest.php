@@ -29,7 +29,7 @@ class ProjectSettingUpdateRequest extends FormRequest
 
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
-            'value' => 'sometimes|string|min:2|max:191',
+            'value' => $this->project_setting->validationRule,
 
             'custom_validation_rules' => 'sometimes|string|min:2|max:191',
 
