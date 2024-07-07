@@ -52,7 +52,7 @@ class ProjectSettingUpdateRequest extends FormRequest
     {
         DB::transaction(function () {
             $this->project_setting->update([
-                'project_setting_section_id' => $this->exists('project_setting_section') ? $this->project_setting_section : $this->project_setting->project_setting_section_id,
+                'project_setting_section_id' => $this->exists('section') ? $this->section : $this->project_setting->project_setting_section_id,
                 'non_translatable_value' => $this->exists('value') && (! $this->project_setting_section->is_translatable) ? $this->value : $this->project_setting->non_translatable_value,
                 'custom_validation_rules' => $this->exists('custom_validation_rules') ? $this->custom_validation_rules : $this->project_setting->custom_validation_rules,
                 'is_editable' => $this->exists('editable') ? $this->is_editable : $this->project_setting->is_editable,
