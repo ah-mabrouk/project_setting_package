@@ -154,7 +154,7 @@ class ProjectSettingResource extends JsonResource
             'id' => $this->id,
             'name' => $this->display_name,
             'selected' => $this->isSelected,
-            'group' => new ProjectSettingGroupSimpleResource($this->group),
+            'project_setting_group' => new ProjectSettingGroupSimpleResource($this->projectSettingGroup),
             'sub_permissions' => SubProjectSettingResource::collection($this->subProjectSettings),
         ];
     }

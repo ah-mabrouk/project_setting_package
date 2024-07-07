@@ -27,7 +27,7 @@ class ProjectSettingSection extends Model
 
     ## Relations
 
-    public function group()
+    public function projectSettingGroup()
     {
         return $this->belongsTo(ProjectSettingGroup::class, 'project_setting_group_id');
     }
