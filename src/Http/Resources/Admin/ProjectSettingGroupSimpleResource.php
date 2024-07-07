@@ -16,8 +16,12 @@ class ProjectSettingGroupSimpleResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
 
             'name' => $this->name,
+            'description' => $this->description,
+
+            'visible' => $this->is_visible,
         ];
     }
 }

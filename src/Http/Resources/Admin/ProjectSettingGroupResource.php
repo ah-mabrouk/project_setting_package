@@ -16,10 +16,14 @@ class ProjectSettingGroupResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'slug' => $this->slug,
 
             'name' => $this->name,
+            'description' => $this->description,
 
-            'sections' => ProjectSettingSectionResource::collection($this->projectSettingSections),
+            'visible' => $this->is_visible,
+
+            // 'sections' => ProjectSettingSectionResource::collection($this->projectSettingSections),
         ];
     }
 }

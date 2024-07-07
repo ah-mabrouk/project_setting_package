@@ -29,7 +29,9 @@ class ProjectSettingGroupStoreRequest extends FormRequest
     {
         return [
             'slug' => 'required|string|min:2|max:191|unique:project_setting_groups,slug',
+
             'name' => 'required|string|min:2|max:191',
+            'description' => 'required|string|min:2|max:191',
         ];
     }
 

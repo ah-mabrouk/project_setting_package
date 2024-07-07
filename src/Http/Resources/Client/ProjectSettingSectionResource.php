@@ -18,7 +18,9 @@ class ProjectSettingSectionResource extends JsonResource
             'id' => $this->id,
 
             'name' => $this->name,
+            'description' => $this->description,
 
+            'group' => new ProjectSettingGroupSimpleResource($this->projectSettingGroup),
             'project_settings' => ProjectSettingResource::collection($this->projectSettings),
         ];
     }

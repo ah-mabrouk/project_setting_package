@@ -16,6 +16,7 @@ class ProjectSettingResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'key' => $this->key,
 
             'name' => $this->name,
             'value' => $this->actualValue,

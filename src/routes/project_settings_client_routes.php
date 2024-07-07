@@ -11,6 +11,7 @@ Route::group([
     'prefix' => config('project_settings.package_client_routes_prefix'),
     'middleware' => [
         'translatable',
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]
 ], function () {
     // Route::apiResource('project-setting-types', ProjectSettingTypeController::class)->only(['index', 'show']);

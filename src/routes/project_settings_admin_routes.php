@@ -12,6 +12,7 @@ Route::group([
     'middleware' => [
         'auth:api',
         'translatable',
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]
 ], function () {
     Route::apiResource('project-setting-types', ProjectSettingTypeController::class)->only(['index', 'show']);

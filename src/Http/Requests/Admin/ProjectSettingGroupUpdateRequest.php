@@ -26,7 +26,9 @@ class ProjectSettingGroupUpdateRequest extends FormRequest
     {
         return [
             'slug' => 'sometimes|string|min:2|max:191|unique:project_setting_groups,slug,' . $this->project_setting_group->id,
+
             'name' => 'sometimes|string|min:2|max:191',
+            'description' => 'sometimes|string|min:2|max:191',
         ];
     }
 
