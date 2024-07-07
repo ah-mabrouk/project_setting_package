@@ -31,7 +31,7 @@ class ProjectSettingSectionUpdateRequest extends FormRequest
         ];
     }
 
-    public function storeProjectSettingSection()
+    public function updateProjectSettingSection()
     {
         DB::transaction(function () {
             $this->project_setting_section->update([
