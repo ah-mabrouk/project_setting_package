@@ -27,6 +27,7 @@ class ProjectSettingResource extends JsonResource
             'translatable' => $this->isTranslatable,
 
             'type' => new ProjectSettingTypeResource($this->projectSettingType),
+            'section' => new ProjectSettingSectionSimpleResource($this->projectSettingSection),
         ];
     }
 }

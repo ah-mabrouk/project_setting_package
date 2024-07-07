@@ -25,7 +25,7 @@ class ProjectSettingUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_setting_section' => 'sometimes|integer|exists:project_setting_sections,id',
+            'section' => 'sometimes|integer|exists:project_setting_sections,id',
 
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
