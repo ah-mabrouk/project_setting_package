@@ -75,10 +75,8 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
             case isset($projectSettingData['image']) && $projectSetting->projectSettingType->name == 'image':
                 $projectSetting->addMedia(type: 'photo', path: $projectSettingData['image'], isMain: true);
                 break;
-            case isset($projectSettingData['translation_data']) && $projectSetting->isTranslatable:
-                self::addModelTranslation($projectSetting, $projectSettingData['translation_data']);
-                break;
         }
+        self::addModelTranslation($projectSetting, $projectSettingData['translation_data']);
     }
 
     protected static function addModelTranslation(Model $model, array $translations)

@@ -118,18 +118,18 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                         'is_editable' => true,
                         'is_return_to_client' => true,
 
-                        // 'translation_data' => [
-                            // 'en' => [
-                                // 'name' => 'name example 4',
-                                // 'description' => 'description example 4',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 4',
+                                'description' => 'description example 4',
                                 // 'key_value' => 'value example 4',
-                            // ],
-                            // 'ar' => [
-                                // 'name' => 'مثال الاسم 4',
-                                // 'description' => 'مثال الوصف 4',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 4',
+                                'description' => 'مثال الوصف 4',
                                 // 'key_value' => 'مثال القيمة 4',
-                            // ],
-                        // ],
+                            ],
+                        ],
                     ],
                     [
                         'type_name' => 'boolean',
@@ -140,18 +140,18 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                         'is_editable' => true,
                         'is_return_to_client' => true,
 
-                        // 'translation_data' => [
-                            // 'en' => [
-                                // 'name' => 'name example 5',
-                                // 'description' => 'description example 5',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 5',
+                                'description' => 'description example 5',
                                 // 'key_value' => 'value example 5',
-                            // ],
-                            // 'ar' => [
-                                // 'name' => 'مثال الاسم 5',
-                                // 'description' => 'مثال الوصف 5',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 5',
+                                'description' => 'مثال الوصف 5',
                                 // 'key_value' => 'مثال القيمة 5',
-                            // ],
-                        // ],
+                            ],
+                        ],
                     ],
                     [
                         'type_name' => 'link',
@@ -162,18 +162,18 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                         'is_editable' => true,
                         'is_return_to_client' => true,
 
-                        // 'translation_data' => [
-                            // 'en' => [
-                                // 'name' => 'name example 6',
-                                // 'description' => 'description example 6',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 6',
+                                'description' => 'description example 6',
                                 // 'key_value' => 'value example 6',
-                            // ],
-                            // 'ar' => [
-                                // 'name' => 'مثال الاسم 6',
-                                // 'description' => 'مثال الوصف 6',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 6',
+                                'description' => 'مثال الوصف 6',
                                 // 'key_value' => 'مثال القيمة 6',
-                            // ],
-                        // ],
+                            ],
+                        ],
                     ],
                     [
                         'type_name' => 'phone',
@@ -189,18 +189,18 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                             'number' => '1003015265',
                         ],
 
-                        // 'translation_data' => [
-                            // 'en' => [
-                                // 'name' => 'name example 7',
-                                // 'description' => 'description example 7',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 7',
+                                'description' => 'description example 7',
                                 // 'key_value' => 'value example 7',
-                            // ],
-                            // 'ar' => [
-                                // 'name' => 'مثال الاسم 7',
-                                // 'description' => 'مثال الوصف 7',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 7',
+                                'description' => 'مثال الوصف 7',
                                 // 'key_value' => 'مثال القيمة 7',
-                            // ],
-                        // ],
+                            ],
+                        ],
                     ],
                     [
                         'type_name' => 'image',
@@ -213,18 +213,18 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
 
                         'image' => 'https://via.placeholder.com/450x150?text=example_setting_8',
 
-                        // 'translation_data' => [
-                            // 'en' => [
-                                // 'name' => 'name example 8',
-                                // 'description' => 'description example 8',
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 8',
+                                'description' => 'description example 8',
                                 // 'key_value' => 'value example 8',
-                            // ],
-                            // 'ar' => [
-                                // 'name' => 'مثال الاسم 8',
-                                // 'description' => 'مثال الوصف 8',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 8',
+                                'description' => 'مثال الوصف 8',
                                 // 'key_value' => 'مثال القيمة 8',
-                            // ],
-                        // ],
+                            ],
+                        ],
                     ],
                 ],
             ],
