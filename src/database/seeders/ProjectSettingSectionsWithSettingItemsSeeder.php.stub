@@ -29,24 +29,24 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                 ],
                 'settings' => [
                     [
-                        'type_name' => 'type1',
-                        'key' => 'setting1',
-                        'non_translatable_value' => 5,
-                        'custom_validation_rules' => 'required|integer|min:3|max:15',
+                        'type_name' => 'string',
+                        'key' => 'example_setting_1',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
                         'is_visible' => true,
                         'is_editable' => true,
                         'is_return_to_client' => true,
 
                         'translation_data' => [
                             'en' => [
-                                'name' => 'name example1',
-                                'description' => 'description example1',
-                                'key_value' => 'value example1',
+                                'name' => 'name example 1',
+                                'description' => 'description example 1',
+                                'key_value' => 'value example 1',
                             ],
                             'ar' => [
-                                'name' => 'مثال الاسم1',
-                                'description' => 'مثال الوصف1',
-                                'key_value' => 'مثال القيمة1',
+                                'name' => 'مثال الاسم 1',
+                                'description' => 'مثال الوصف 1',
+                                'key_value' => 'مثال القيمة 1',
                             ],
                         ],
                     ],
@@ -66,26 +66,165 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                 ],
                 'settings' => [
                     [
-                        'type_name' => 'type2',
-                        'key' => 'setting2',
-                        'non_translatable_value' => 5,
-                        'custom_validation_rules' => 'required|integer|min:3|max:15',
+                        'type_name' => 'text',
+                        'key' => 'example_setting_2',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
                         'is_visible' => true,
                         'is_editable' => true,
                         'is_return_to_client' => true,
 
                         'translation_data' => [
                             'en' => [
-                                'name' => 'name example2',
-                                'description' => 'description example2',
-                                'key_value' => 'value example2',
+                                'name' => 'name example 2',
+                                'description' => 'description example 2',
+                                'key_value' => 'value example 2',
                             ],
                             'ar' => [
-                                'name' => 'مثال الاسم2',
-                                'description' => 'مثال الوصف2',
-                                'key_value' => 'مثال القيمة2',
+                                'name' => 'مثال الاسم 2',
+                                'description' => 'مثال الوصف 2',
+                                'key_value' => 'مثال القيمة 2',
                             ],
                         ],
+                    ],
+                    [
+                        'type_name' => 'textarea',
+                        'key' => 'example_setting_3',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 3',
+                                'description' => 'description example 3',
+                                'key_value' => 'value example 3',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 3',
+                                'description' => 'مثال الوصف 3',
+                                'key_value' => 'مثال القيمة 3',
+                            ],
+                        ],
+                    ],
+                    [
+                        'type_name' => 'numeric',
+                        'key' => 'example_setting_4',
+                        'non_translatable_value' => '5',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        // 'translation_data' => [
+                            // 'en' => [
+                                // 'name' => 'name example 4',
+                                // 'description' => 'description example 4',
+                                // 'key_value' => 'value example 4',
+                            // ],
+                            // 'ar' => [
+                                // 'name' => 'مثال الاسم 4',
+                                // 'description' => 'مثال الوصف 4',
+                                // 'key_value' => 'مثال القيمة 4',
+                            // ],
+                        // ],
+                    ],
+                    [
+                        'type_name' => 'boolean',
+                        'key' => 'example_setting_5',
+                        'non_translatable_value' => '1',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        // 'translation_data' => [
+                            // 'en' => [
+                                // 'name' => 'name example 5',
+                                // 'description' => 'description example 5',
+                                // 'key_value' => 'value example 5',
+                            // ],
+                            // 'ar' => [
+                                // 'name' => 'مثال الاسم 5',
+                                // 'description' => 'مثال الوصف 5',
+                                // 'key_value' => 'مثال القيمة 5',
+                            // ],
+                        // ],
+                    ],
+                    [
+                        'type_name' => 'link',
+                        'key' => 'example_setting_6',
+                        'non_translatable_value' => 'https://google.com',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        // 'translation_data' => [
+                            // 'en' => [
+                                // 'name' => 'name example 6',
+                                // 'description' => 'description example 6',
+                                // 'key_value' => 'value example 6',
+                            // ],
+                            // 'ar' => [
+                                // 'name' => 'مثال الاسم 6',
+                                // 'description' => 'مثال الوصف 6',
+                                // 'key_value' => 'مثال القيمة 6',
+                            // ],
+                        // ],
+                    ],
+                    [
+                        'type_name' => 'phone',
+                        'key' => 'example_setting_7',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        'phone' => [
+                            'country_code' => '0020',
+                            'number' => '1003015265',
+                        ],
+
+                        // 'translation_data' => [
+                            // 'en' => [
+                                // 'name' => 'name example 7',
+                                // 'description' => 'description example 7',
+                                // 'key_value' => 'value example 7',
+                            // ],
+                            // 'ar' => [
+                                // 'name' => 'مثال الاسم 7',
+                                // 'description' => 'مثال الوصف 7',
+                                // 'key_value' => 'مثال القيمة 7',
+                            // ],
+                        // ],
+                    ],
+                    [
+                        'type_name' => 'image',
+                        'key' => 'example_setting_8',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => true,
+
+                        'image' => 'https://via.placeholder.com/450x150?text=example_setting_8',
+
+                        // 'translation_data' => [
+                            // 'en' => [
+                                // 'name' => 'name example 8',
+                                // 'description' => 'description example 8',
+                                // 'key_value' => 'value example 8',
+                            // ],
+                            // 'ar' => [
+                                // 'name' => 'مثال الاسم 8',
+                                // 'description' => 'مثال الوصف 8',
+                                // 'key_value' => 'مثال القيمة 8',
+                            // ],
+                        // ],
                     ],
                 ],
             ],

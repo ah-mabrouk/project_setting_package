@@ -2,14 +2,16 @@
 
 namespace Mabrouk\ProjectSetting\Models;
 
+use Mabrouk\Mediable\Traits\Mediable;
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
+use Mabrouk\ProjectSetting\Traits\HasPhone;
 use Mabrouk\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProjectSetting extends Model
 {
-    use HasFactory, Translatable, Filterable;
+    use HasFactory, Translatable, Filterable, HasPhone, Mediable;
 
     public $translatedAttributes = [
         'name',
@@ -66,6 +68,11 @@ class ProjectSetting extends Model
     public function getValidationRuleAttribute()
     {
         return $this->custom_validation_rules ?? $this->projectSettingType->validation_rules;
+    }
+
+    public function getMainImageAttribute()
+    {
+        return $this->mainMedia;
     }
 
     ## Query Scope Methods

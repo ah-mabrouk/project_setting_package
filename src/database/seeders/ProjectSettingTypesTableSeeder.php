@@ -17,14 +17,50 @@ class ProjectSettingTypesTableSeeder extends Seeder
     {
         $projectSettingTypes = [
             [
-                'name' => 'type1',
-                'validation_rules' => 'required|string|min:5|max:10',
+                'name' => 'string',
+                'validation_rules' => 'sometimes|string|min:2|max:255',
                 'is_translatable' => true,
             ],
             [
-                'name' => 'type2',
-                'validation_rules' => 'required|string|min:5|max:10',
+                'name' => 'text',
+                'validation_rules' => 'sometimes|string|min:2|max:40000',
                 'is_translatable' => true,
+            ],
+            [
+                'name' => 'textarea',
+                'validation_rules' => 'sometimes|string|min:2|max:40000',
+                'is_translatable' => true,
+            ],
+            [
+                'name' => 'numeric',
+                'validation_rules' => 'sometimes|numeric|min:0|max:999999',
+                'is_translatable' => false,
+            ],
+            [
+                'name' => 'boolean',
+                'validation_rules' => 'sometimes|boolean',
+                'is_translatable' => false,
+            ],
+            [
+                'name' => 'link',
+                'validation_rules' => 'sometimes|string|active_url|max:255',
+                'is_translatable' => false,
+            ],
+            [
+                'name' => 'phone',
+                'validation_rules' => json_encode([
+                    'phone' => 'sometimes|array',
+                    'phone.country_code' => 'required_with:phone|string|exists:countries,phone_code',
+                    'phone.number' => 'required_with:phone|numeric|digits_between:9,15',
+                ]),
+                'is_translatable' => false,
+            ],
+            [
+                'name' => 'image',
+                'validation_rules' => json_encode([
+                    'image' => 'sometimes|mimes:png,jpeg|max:512',
+                ]),
+                'is_translatable' => false,
             ],
         ];
 

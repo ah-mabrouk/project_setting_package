@@ -41,6 +41,29 @@ if (! function_exists('pagination_length')) {
     }
 }
 
+if (!function_exists('random_by')) {
+    function random_by($num = 6)
+    {
+        $start = (int) \str_repeat(1, $num);
+        $end = (int) \str_repeat(9, $num);
+        return \rand($start, $end);
+    }
+}
+
+if (!function_exists('format_json_strings_to_array')) {
+    function format_json_strings_to_array(array $fields)
+    {
+        $fieldsToBeMerged = [];
+        for ($i = 0; $i < \count($fields); $i++) {
+            $field = $fields[$i];
+            if (request()->exists($field)) {
+                $fieldsToBeMerged[$field] = \gettype(request()->$field) == 'string' ? (array) \json_decode(request()->$field) : request()->$field;
+            }
+        }
+        return $fieldsToBeMerged;
+    }
+}
+
 if (!function_exists('format_json_strings_to_boolean')) {
     function format_json_strings_to_boolean(array $fields, bool $includeBooleanPrefix = true)
     {

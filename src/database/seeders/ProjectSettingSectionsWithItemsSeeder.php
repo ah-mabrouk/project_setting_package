@@ -62,7 +62,7 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
                         self::filteredFillableProjectSettingObjectData($fillableAttributes, $projectSettingData)
                     )
                 );
-            self::addProjectSettingTranslation($setting, $projectSettingData['translation_data']);
+            if (isset($projectSettingData['translation_data'])) self::addProjectSettingTranslation($setting, $projectSettingData['translation_data']);
         }
     }
 

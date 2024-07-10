@@ -2,6 +2,7 @@
 
 namespace Mabrouk\ProjectSetting\Http\Requests\Admin;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,18 +25,17 @@ class ProjectSettingUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return \array_merge([
             'section' => 'sometimes|integer|exists:project_setting_sections,id',
 
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
-            'value' => $this->project_setting->validationRule,
 
             'custom_validation_rules' => 'sometimes|string|min:2|max:191',
 
             'editable' => 'sometimes|boolean',
             'return_to_client' => 'sometimes|boolean',
-        ];
+        ], $this->valueValidationRules());
     }
 
     public function getValidatorInstance()
@@ -44,6 +44,7 @@ class ProjectSettingUpdateRequest extends FormRequest
         $this->merge(format_json_strings_to_boolean(['editable', 'return_to_client']));
 
         if ($this->exists('value') && $this->project_setting->is_translatable) $this->merge(['key_value' => $this->value]);
+        if ($this->exists('phone')) $this->merge(format_json_strings_to_array(['phone']));
 
         return parent::getValidatorInstance();
     }
@@ -58,7 +59,62 @@ class ProjectSettingUpdateRequest extends FormRequest
                 'is_editable' => $this->exists('editable') ? $this->is_editable : $this->project_setting->is_editable,
                 'is_return_to_client' => $this->exists('return_to_client') ? $this->is_return_to_client : $this->project_setting->is_return_to_client,
             ]);
+            $this->updatePhone()
+                ->updateImage();
         });
         return $this->project_setting->refresh();
+    }
+
+    protected function valueValidationRules(): array
+    {
+        if (\in_array($this->project_setting->projectSettingType->name, ['phone', 'image'])) return \json_decode($this->project_setting->validationRule);
+
+        return ['value' => $this->project_setting->validationRule];
+    }
+
+    protected function updatePhone()
+    {
+        if (! $this->exists('phone')) return $this;
+
+        $previousPhoneNumber = $this->project_setting->phone;
+        if ($previousPhoneNumber != null) {
+            $this->project_setting->editPhone($previousPhoneNumber, \array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
+            return $this;
+        }
+        $phone = $this->project_setting->addPhone(\array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
+
+        return $this;
+    }
+
+    protected function updateImage()
+    {
+        if (! $this->exists('image')) return $this;
+
+        if ($this->project_setting->mainImage != null) {
+            $this->project_setting->editMedia(
+                $this->project_setting->mainImage,
+                $this->image->storeAs(
+                    $this->project_setting->photosDirectory,
+                    Str::slug($this->project_setting->name . random_by(), '_') . '.' . $this->image->getClientOriginalExtension()
+                ),
+                'image',
+                null,
+                true,
+            );
+            return $this;
+        }
+
+        $image = $this->project_setting->addMedia(
+            'photo',
+            $this->image->storeAs(
+                $this->project_setting->photosDirectory,
+                Str::slug($this->project_setting->name . random_by(), '_') . '.' . $this->image->getClientOriginalExtension()
+            ),
+            'image',
+            null,
+            true
+        );
+
+        return $this;
     }
 }

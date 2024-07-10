@@ -2,7 +2,9 @@
 
 namespace Mabrouk\ProjectSetting\Http\Resources\Admin;
 
+use App\Http\Resources\Admin\PhoneResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Mabrouk\Mediable\Http\Resources\MediaResource;
 
 class ProjectSettingResource extends JsonResource
 {
@@ -22,10 +24,12 @@ class ProjectSettingResource extends JsonResource
 
             'name' => $this->name,
             'description' => $this->description,
-            'value' => $this->value,
+            'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->value),
 
             'translatable' => $this->isTranslatable,
 
+            'phone' => $this->when($this->projectSettingType->name == 'phone', new PhoneResource($this->phone)),
+            'image' => $this->when($this->projectSettingType->name == 'image', new MediaResource($this->mainImage)),
             'type' => new ProjectSettingTypeResource($this->projectSettingType),
             'section' => new ProjectSettingSectionSimpleResource($this->projectSettingSection),
         ];
