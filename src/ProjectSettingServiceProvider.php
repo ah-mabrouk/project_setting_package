@@ -11,13 +11,15 @@ use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingTypeUpdateCommand;
 class ProjectSettingServiceProvider extends ServiceProvider
 {
     private $packageMigrations = [
+        'create_project_setting_countries_table',
         'create_project_setting_groups_table',
         'create_project_setting_group_translations_table',
+        'create_project_setting_phones_table',
         'create_project_setting_sections_table',
         'create_project_setting_section_translations_table',
+        'create_project_setting_types_table',
         'create_project_settings_table',
         'create_project_setting_translations_table',
-        'create_project_setting_types_table',
     ];
 
     private $packageSeeders = [
