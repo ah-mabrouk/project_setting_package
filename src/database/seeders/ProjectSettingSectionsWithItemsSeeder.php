@@ -41,7 +41,7 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
                 self::filteredFillableProjectSettingSectionObjectData($fillableAttributes, $projectSettingSections[$i])
             );
 
-            self::addProjectSettingTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
+            self::addModelTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
             self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $projectSettingSections[$i]['settings']);
         }
     }
@@ -62,14 +62,29 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
                         self::filteredFillableProjectSettingObjectData($fillableAttributes, $projectSettingData)
                     )
                 );
-            if (isset($projectSettingData['translation_data'])) self::addProjectSettingTranslation($setting, $projectSettingData['translation_data']);
+            self::addProjectSettingRelatedObjects($setting, $projectSettingData);
         }
     }
 
-    protected static function addProjectSettingTranslation(Model $projectSettingSection, array $translations)
+    protected static function addProjectSettingRelatedObjects(ProjectSetting $projectSetting, array $projectSettingData)
+    {
+        switch (true) {
+            case isset($projectSettingData['phone']) && $projectSetting->projectSettingType->name == 'phone':
+                $projectSetting->addPhone($projectSettingData['phone']);
+                break;
+            case isset($projectSettingData['image']) && $projectSetting->projectSettingType->name == 'image':
+                $projectSetting->addMedia(type: 'photo', path: $projectSettingData['image'], isMain: true);
+                break;
+            case isset($projectSettingData['translation_data']) && $projectSetting->isTranslatable:
+                self::addModelTranslation($projectSetting, $projectSettingData['translation_data']);
+                break;
+        }
+    }
+
+    protected static function addModelTranslation(Model $model, array $translations)
     {
         foreach ($translations as $locale => $translationData) {
-            $projectSettingSection->translate($translationData, $locale);
+            $model->translate($translationData, $locale);
         }
     }
 

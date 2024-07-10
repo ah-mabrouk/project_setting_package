@@ -10,6 +10,8 @@ class ProjectSettingPhone extends Model
 {
     use HasFactory;
 
+    protected $table = 'setting_phones';
+
     protected $fillable = [
         'id',
         'related_object_type',
