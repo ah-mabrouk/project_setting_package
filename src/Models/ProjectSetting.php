@@ -67,7 +67,7 @@ class ProjectSetting extends Model
 
     public function getValidationRuleAttribute()
     {
-        return $this->custom_validation_rules ?? $this->projectSettingType->validation_rules;
+        return $this->custom_validation_rules != null ? $this->custom_validation_rules : $this->projectSettingType->validation_rules;
     }
 
     public function getMainImageAttribute()
