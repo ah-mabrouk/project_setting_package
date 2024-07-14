@@ -67,7 +67,7 @@ class ProjectSettingUpdateRequest extends FormRequest
 
     protected function valueValidationRules(): array
     {
-        if (\in_array($this->project_setting->projectSettingType->name, ['phone', 'image'])) return \json_decode($this->project_setting->validationRule);
+        if (\in_array($this->project_setting->projectSettingType->name, ['phone', 'image'])) return (array) \json_decode($this->project_setting->validationRule);
 
         return ['value' => $this->project_setting->validationRule];
     }
@@ -81,7 +81,7 @@ class ProjectSettingUpdateRequest extends FormRequest
             $this->project_setting->editPhone($previousPhoneNumber, \array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
             return $this;
         }
-        $phone = $this->project_setting->addPhone(\array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
+        $this->project_setting->addPhone(\array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
 
         return $this;
     }
@@ -104,7 +104,7 @@ class ProjectSettingUpdateRequest extends FormRequest
             return $this;
         }
 
-        $image = $this->project_setting->addMedia(
+        $this->project_setting->addMedia(
             'photo',
             $this->image->storeAs(
                 $this->project_setting->photosDirectory,

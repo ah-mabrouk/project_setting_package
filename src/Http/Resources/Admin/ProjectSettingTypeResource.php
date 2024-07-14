@@ -18,7 +18,7 @@ class ProjectSettingTypeResource extends JsonResource
             'id' => $this->id,
 
             'name' => $this->name,
-            'validation_rules' => $this->validation_rules,
+            'validation_rules' => \in_array($this->name, ['phone', 'image']) ? (array) \json_decode($this->validation_rules) : $this->validation_rules,
 
             'translatable' => $this->is_translatable,
         ];

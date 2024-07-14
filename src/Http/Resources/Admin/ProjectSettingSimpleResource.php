@@ -20,7 +20,7 @@ class ProjectSettingSimpleResource extends JsonResource
             'id' => $this->id,
             'key' => $this->key,
 
-            'validation_rule' => $this->ValidationRule,
+            'validation_rule' => \in_array($this->projectSettingType->name, ['phone', 'image']) ? (array) \json_decode($this->validationRule) : $this->validationRule,
 
             'name' => $this->name,
             'description' => $this->description,
