@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "laravel/framework": "^9.19",
+        "laravel/framework": ">=9",
         "mabrouk/translatable": "^1.0",
         "mabrouk/filterable": "^1.0",
         "mabrouk/mediable": "^3"
