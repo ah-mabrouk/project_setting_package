@@ -40,4 +40,12 @@ class ProjectSettingSectionStoreRequest extends FormRequest
         });
         return $this->projectSettingSection->refresh();
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('mabrouk/project_settings/project_setting_sections.attributes.name'),
+            'description' => __('mabrouk/project_settings/project_setting_sections.attributes.description'),
+        ];
+    }
 }

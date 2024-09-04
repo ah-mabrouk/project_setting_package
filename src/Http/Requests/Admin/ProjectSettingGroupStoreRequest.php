@@ -44,4 +44,13 @@ class ProjectSettingGroupStoreRequest extends FormRequest
         });
         return $this->projectSettingGroup->refresh();
     }
+
+    public function attributes(): array
+    {
+        return [
+            'slug' => __('mabrouk/project_settings/project_setting_groups.attributes.slug'),
+            'name' => __('mabrouk/project_settings/project_setting_groups.attributes.name'),
+            'description' => __('mabrouk/project_settings/project_setting_groups.attributes.description'),
+        ];
+    }
 }

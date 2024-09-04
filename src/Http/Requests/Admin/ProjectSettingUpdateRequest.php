@@ -117,4 +117,16 @@ class ProjectSettingUpdateRequest extends FormRequest
 
         return $this;
     }
+
+    public function attributes(): array
+    {
+        return [
+            'section' => __('mabrouk/project_settings/project_settings.attributes.section'),
+            'name' => __('mabrouk/project_settings/project_settings.attributes.name'),
+            'description' => __('mabrouk/project_settings/project_settings.attributes.description'),
+            'custom_validation_rules' => __('mabrouk/project_settings/project_settings.attributes.custom_validation_rules'),
+            'editable' => __('mabrouk/project_settings/project_settings.attributes.editable'),
+            'return_to_client' => __('mabrouk/project_settings/project_settings.attributes.return_to_client'),
+        ];
+    }
 }
