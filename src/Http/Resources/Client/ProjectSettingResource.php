@@ -23,12 +23,12 @@ class ProjectSettingResource extends JsonResource
             'name' => $this->name,
             'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->value),
 
-            'translatable' => $this->isTranslatable,
+            // 'translatable' => $this->isTranslatable,
 
             'phone' => $this->when($this->projectSettingType->name == 'phone', new PhoneResource($this->phone)),
             'image' => $this->when($this->projectSettingType->name == 'image', new MediaResource($this->mainImage)),
             'type' => new ProjectSettingTypeResource($this->projectSettingType),
-            'section' => new ProjectSettingSectionSimpleResource($this->projectSettingSection),
+            // 'section' => new ProjectSettingSectionSimpleResource($this->projectSettingSection),
         ];
     }
 }
