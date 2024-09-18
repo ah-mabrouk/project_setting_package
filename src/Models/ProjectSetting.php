@@ -82,6 +82,11 @@ class ProjectSetting extends Model
         $query->where('key', $key);
     }
 
+    public function scopeOfKeys($query, array $keys = [])
+    {
+        $query->whereIn('key', $keys);
+    }
+
     public function scopeOfType($query, int $typeId = 0)
     {
         $query->where('project_setting_type_id', $typeId);

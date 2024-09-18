@@ -6,9 +6,11 @@ use Mabrouk\Filterable\Helpers\QueryFilter;
 
 class ProjectSettingFilter extends QueryFilter
 {
-    public function of_key($key = '')
+    public function of_keys($keys = '')
     {
-        return $key ? $this->builder->ofKey($key) : $this->builder;
+        $keysArray = explode(',', $keys);
+
+        return $keys ? $this->builder->ofKeys($keysArray) : $this->builder;
     }
 
     public function of_type($typeId = '')
