@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
 use Mabrouk\ProjectSetting\Models\ProjectSetting;
 
-class ProjectSettingUpdateRequest extends FormRequest
+class ProjectSettingBackendUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,12 +32,17 @@ class ProjectSettingUpdateRequest extends FormRequest
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
 
+            'custom_validation_rules' => 'sometimes|string|min:2|max:191',
+
+            'editable' => 'sometimes|boolean',
+            'return_to_client' => 'sometimes|boolean',
         ], $this->valueValidationRules());
     }
 
     public function getValidatorInstance()
     {
         request()->locale = request()->input('locale');
+        $this->merge(format_json_strings_to_boolean(['editable', 'return_to_client']));
 
         if ($this->exists('value') && $this->project_setting->is_translatable) $this->merge(['key_value' => $this->value]);
         if ($this->exists('phone')) $this->merge(format_json_strings_to_array(['phone']));
@@ -51,6 +56,9 @@ class ProjectSettingUpdateRequest extends FormRequest
             $this->project_setting->update([
                 'project_setting_section_id' => $this->exists('section') ? $this->section : $this->project_setting->project_setting_section_id,
                 'non_translatable_value' => $this->exists('value') && (! $this->project_setting_section->is_translatable) ? $this->value : $this->project_setting->non_translatable_value,
+                'custom_validation_rules' => $this->exists('custom_validation_rules') ? $this->custom_validation_rules : $this->project_setting->custom_validation_rules,
+                'is_editable' => $this->exists('editable') ? $this->is_editable : $this->project_setting->is_editable,
+                'is_return_to_client' => $this->exists('return_to_client') ? $this->is_return_to_client : $this->project_setting->is_return_to_client,
             ]);
             $this->updatePhone()
                 ->updateImage();
@@ -120,6 +128,9 @@ class ProjectSettingUpdateRequest extends FormRequest
             'section' => __('mabrouk/project_settings/project_settings.attributes.section'),
             'name' => __('mabrouk/project_settings/project_settings.attributes.name'),
             'description' => __('mabrouk/project_settings/project_settings.attributes.description'),
+            'custom_validation_rules' => __('mabrouk/project_settings/project_settings.attributes.custom_validation_rules'),
+            'editable' => __('mabrouk/project_settings/project_settings.attributes.editable'),
+            'return_to_client' => __('mabrouk/project_settings/project_settings.attributes.return_to_client'),
         ];
     }
 }
