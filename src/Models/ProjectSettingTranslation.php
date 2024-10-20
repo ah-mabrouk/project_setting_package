@@ -13,7 +13,7 @@ class ProjectSettingTranslation extends Model
         'locale',
         'name',
         'description',
-        'value',
+        'key_value',
     ];
 
     ## Relations

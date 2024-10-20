@@ -145,21 +145,34 @@ class ProjectSetting extends Model
         $locale = request()->header('X-locale') ?? $locale;
         $keyObject = self::cache()->where('key', $key)->first();
         
-        if($keyObject && $keyObject->projectSettingType->is_translatable) {
-            $value = $keyObject->tr('value', $locale) ??
-            $keyObject->tr('value', config('translatable.fallback_locale'));
-        } else {
-            $value = $keyObject?->non_translatable_value;
-        }
+        switch (true) {
+            case !$keyObject : 
+                return null;
 
-        $value = $withoutTags ? \strip_tags($value) : $value;
-        return $asInt ? (int) $value : $value;
+            case $keyObject->projectSettingType->name == 'phone' :
+                return $keyObject->phone;
+
+            case $keyObject->projectSettingType->name == 'image' :
+                return $keyObject->mainImage; 
+
+            case !$keyObject->non_translatable_value :
+                $value = $keyObject->tr('key_value', $locale) ?? $keyObject->tr('key_value', config('translatable.fallback_locale'));
+                return $withoutTags ? \strip_tags($value) : $value;
+
+            case $keyObject->non_translatable_value :
+                return $asInt ? (int) $keyObject->non_translatable_value : $keyObject->non_translatable_value;
+                
+            default:
+                return null;
+        }
     }
 
     public static function keys(array $keys, $locale = 'en')
     {
-        return self::cache()->filter(function ($setting) use ($keys) {
-            return \in_array($setting->key, $keys);
-        });
+        return collect($keys)->mapWithKeys(function($setting) use ($locale) {
+            return [
+                $setting => self::key(key: $setting, locale: $locale)
+            ];
+        })->toArray();
     }    
 }
