@@ -1,13 +1,13 @@
 <?php
 
-namespace Mabrouk\ProjectSetting\Http\Requests\Admin;
+namespace Mabrouk\ProjectSetting\Http\Requests\Backend;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
 use Mabrouk\ProjectSetting\Models\ProjectSetting;
 
-class ProjectSettingBackendUpdateRequest extends FormRequest
+class ProjectSettingUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -44,8 +44,12 @@ class ProjectSettingBackendUpdateRequest extends FormRequest
         request()->locale = request()->input('locale');
         $this->merge(format_json_strings_to_boolean(['editable', 'return_to_client']));
 
-        if ($this->exists('value') && $this->project_setting->is_translatable) $this->merge(['key_value' => $this->value]);
-        if ($this->exists('phone')) $this->merge(format_json_strings_to_array(['phone']));
+        if ($this->exists('value') && $this->project_setting->is_translatable) {
+            $this->merge(['key_value' => $this->value]);
+        }
+        if ($this->exists('phone')) {
+            $this->merge(format_json_strings_to_array(['phone']));
+        }
 
         return parent::getValidatorInstance();
     }
@@ -65,20 +69,24 @@ class ProjectSettingBackendUpdateRequest extends FormRequest
         });
 
         ProjectSetting::cache(true);
-        
+
         return $this->project_setting->refresh();
     }
 
     protected function valueValidationRules(): array
     {
-        if (\in_array($this->project_setting->projectSettingType->name, ['phone', 'image'])) return (array) \json_decode($this->project_setting->validationRule);
+        if (\in_array($this->project_setting->projectSettingType->name, ['phone', 'image'])) {
+            return (array) \json_decode($this->project_setting->validationRule);
+        }
 
         return ['value' => $this->project_setting->validationRule];
     }
 
     protected function updatePhone()
     {
-        if (! $this->exists('phone')) return $this;
+        if (! $this->exists('phone')) {
+            return $this;
+        }
 
         $previousPhoneNumber = $this->project_setting->phone;
         if ($previousPhoneNumber != null) {
@@ -92,7 +100,9 @@ class ProjectSettingBackendUpdateRequest extends FormRequest
 
     protected function updateImage()
     {
-        if (! $this->exists('image')) return $this;
+        if (! $this->exists('image')) {
+            return $this;
+        }
 
         if ($this->project_setting->mainImage != null) {
             $this->project_setting->editMedia(

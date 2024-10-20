@@ -1,23 +1,23 @@
 <?php
 
-namespace Mabrouk\ProjectSetting\Http\Controllers\Admin;
+namespace Mabrouk\ProjectSetting\Http\Controllers\Backend;
 
 use Mabrouk\ProjectSetting\Models\ProjectSetting;
 use Mabrouk\ProjectSetting\Models\ProjectSettingGroup;
 use Mabrouk\ProjectSetting\Http\Controllers\Controller;
 use Mabrouk\ProjectSetting\Models\ProjectSettingSection;
-use Mabrouk\ProjectSetting\Filters\Admin\ProjectSettingFilter;
-use Mabrouk\ProjectSetting\Http\Resources\Admin\ProjectSettingResource;
-use Mabrouk\ProjectSetting\Http\Requests\Admin\ProjectSettingBackendUpdateRequest;
+use Mabrouk\ProjectSetting\Filters\Backend\ProjectSettingFilter;
+use Mabrouk\ProjectSetting\Http\Resources\Backend\ProjectSettingResource;
+use Mabrouk\ProjectSetting\Http\Requests\Backend\ProjectSettingUpdateRequest;
 
-class ProjectSettingBackendController extends Controller
+class ProjectSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
      * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingSection  $project_setting_section
-     * @param  \Mabrouk\ProjectSetting\Filters\Admin\ProjectSettingFilter  $filters
+     * @param  \Mabrouk\ProjectSetting\Filters\Backend\ProjectSettingFilter  $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingGroup $project_setting_group, ProjectSettingSection $project_setting_section, ProjectSettingFilter $filters)
@@ -30,13 +30,13 @@ class ProjectSettingBackendController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Mabrouk\ProjectSetting\Http\Requests\Admin\ProjectSettingBackendUpdateRequest  $request
+     * @param  \Mabrouk\ProjectSetting\Http\Requests\Backend\ProjectSettingUpdateRequest  $request
      * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
      * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingSection  $project_setting_section
      * @param  \Mabrouk\ProjectSetting\Models\ProjectSetting  $project_setting
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectSettingBackendUpdateRequest $request, ProjectSettingGroup $project_setting_group, ProjectSettingSection $project_setting_section, ProjectSetting $project_setting)
+    public function update(ProjectSettingUpdateRequest $request, ProjectSettingGroup $project_setting_group, ProjectSettingSection $project_setting_section, ProjectSetting $project_setting)
     {
         $projectSettingGroup = $request->updateProjectSetting();
         return response([
