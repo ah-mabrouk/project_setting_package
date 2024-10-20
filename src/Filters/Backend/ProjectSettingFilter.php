@@ -11,6 +11,13 @@ class ProjectSettingFilter extends QueryFilter
         return $key ? $this->builder->ofKey($key) : $this->builder;
     }
 
+    public function of_keys($keys = '')
+    {
+        $keysArray = explode(',', $keys);
+
+        return $keys ? $this->builder->ofKeys($keysArray) : $this->builder;
+    }
+    
     public function of_type($typeId = '')
     {
         return \is_int($typeId) ? $this->builder->ofType($typeId) : $this->builder;
