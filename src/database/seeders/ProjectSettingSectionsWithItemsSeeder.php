@@ -44,6 +44,8 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
             self::addModelTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
             self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $projectSettingSections[$i]['settings']);
         }
+
+        ProjectSetting::cache(true);
     }
 
     protected static function addSectionSettings(Collection $allProjectSettingTypes, ProjectSettingSection $projectSettingSection, array $projectSettings)

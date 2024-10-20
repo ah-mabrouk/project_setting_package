@@ -2,6 +2,7 @@
 
 namespace Mabrouk\ProjectSetting\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Mabrouk\Mediable\Traits\Mediable;
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
@@ -123,4 +124,19 @@ class ProjectSetting extends Model
 
     ## Other Methods
 
+    public static function cache(bool $force = false)
+    {
+        if ($force) {
+            self::forgetCache();
+            Cache::rememberForever('project_settings', function () {
+                return self::with('translations')->get();
+            });
+        }
+        return Cache::has('project_settings') ? Cache::get('project_settings') : self::cache(true);
+    }
+
+    public static function forgetCache(): void
+    {
+        Cache::forget('project_settings');
+    }
 }

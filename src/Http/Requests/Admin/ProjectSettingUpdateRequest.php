@@ -5,6 +5,7 @@ namespace Mabrouk\ProjectSetting\Http\Requests\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
+use Mabrouk\ProjectSetting\Models\ProjectSetting;
 
 class ProjectSettingUpdateRequest extends FormRequest
 {
@@ -62,6 +63,9 @@ class ProjectSettingUpdateRequest extends FormRequest
             $this->updatePhone()
                 ->updateImage();
         });
+
+        ProjectSetting::cache(true);
+        
         return $this->project_setting->refresh();
     }
 
