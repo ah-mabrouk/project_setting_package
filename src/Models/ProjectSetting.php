@@ -139,4 +139,27 @@ class ProjectSetting extends Model
     {
         Cache::forget('project_settings');
     }
+
+    public static function key($key, string $locale = 'en', bool $asInt = false, bool $withoutTags = true)
+    {
+        $locale = request()->header('X-locale') ?? $locale;
+        $keyObject = self::cache()->where('key', $key)->first();
+        
+        if($keyObject && $keyObject->projectSettingType->is_translatable) {
+            $value = $keyObject->tr('value', $locale) ??
+            $keyObject->tr('value', config('translatable.fallback_locale'));
+        } else {
+            $value = $keyObject?->non_translatable_value;
+        }
+
+        $value = $withoutTags ? \strip_tags($value) : $value;
+        return $asInt ? (int) $value : $value;
+    }
+
+    public static function keys(array $keys, $locale = 'en')
+    {
+        return self::cache()->filter(function ($setting) use ($keys) {
+            return \in_array($setting->key, $keys);
+        });
+    }    
 }
