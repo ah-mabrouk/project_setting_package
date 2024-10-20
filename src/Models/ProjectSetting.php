@@ -129,7 +129,7 @@ class ProjectSetting extends Model
         if ($force) {
             self::forgetCache();
             Cache::rememberForever('project_settings', function () {
-                return self::with('translations')->get();
+                return self::with('translations', 'phone', 'media')->get();
             });
         }
         return Cache::has('project_settings') ? Cache::get('project_settings') : self::cache(true);
@@ -169,9 +169,9 @@ class ProjectSetting extends Model
 
     public static function keys(array $keys, $locale = 'en')
     {
-        return collect($keys)->mapWithKeys(function($setting) use ($locale) {
+        return collect($keys)->mapWithKeys(function($settingKey) use ($locale) {
             return [
-                $setting => self::key(key: $setting, locale: $locale)
+                $settingKey => self::key(key: $settingKey, locale: $locale)
             ];
         })->toArray();
     }    
