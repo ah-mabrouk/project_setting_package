@@ -86,6 +86,7 @@ class ProjectSettingServiceProvider extends ServiceProvider
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_admin_routes.php');
             $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_client_routes.php');
+            $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_backend_routes.php');
         });
     }
 

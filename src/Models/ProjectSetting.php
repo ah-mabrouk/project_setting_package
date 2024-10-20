@@ -2,6 +2,7 @@
 
 namespace Mabrouk\ProjectSetting\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Mabrouk\Mediable\Traits\Mediable;
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
@@ -123,4 +124,55 @@ class ProjectSetting extends Model
 
     ## Other Methods
 
+    public static function cache(bool $force = false)
+    {
+        if ($force) {
+            self::forgetCache();
+            Cache::rememberForever('project_settings', function () {
+                return self::with('translations', 'phone', 'media')->get();
+            });
+        }
+        return Cache::has('project_settings') ? Cache::get('project_settings') : self::cache(true);
+    }
+
+    public static function forgetCache(): void
+    {
+        Cache::forget('project_settings');
+    }
+
+    public static function key($key, string $locale = 'en', bool $asInt = false, bool $withoutTags = true)
+    {
+        $locale = request()->header('X-locale') ?? $locale;
+        $keyObject = self::cache()->where('key', $key)->first();
+        
+        switch (true) {
+            case !$keyObject : 
+                return null;
+
+            case $keyObject->projectSettingType->name == 'phone' :
+                return $keyObject->phone;
+
+            case $keyObject->projectSettingType->name == 'image' :
+                return $keyObject->mainImage; 
+
+            case !$keyObject->non_translatable_value :
+                $value = $keyObject->tr('key_value', $locale) ?? $keyObject->tr('key_value', config('translatable.fallback_locale'));
+                return $withoutTags ? \strip_tags($value) : $value;
+
+            case $keyObject->non_translatable_value :
+                return $asInt ? (int) $keyObject->non_translatable_value : $keyObject->non_translatable_value;
+                
+            default:
+                return null;
+        }
+    }
+
+    public static function keys(array $keys, $locale = 'en')
+    {
+        return collect($keys)->mapWithKeys(function($settingKey) use ($locale) {
+            return [
+                $settingKey => self::key(key: $settingKey, locale: $locale)
+            ];
+        })->toArray();
+    }    
 }
