@@ -77,7 +77,7 @@ class ProjectSettingPublishRoutesCommand extends Command
     private function publishConfiguration($forcePublish = false)
     {
         $params = [
-            '--provider' => 'Mabrouk\Permission\PermissionServiceProvider',
+            '--provider' => 'Mabrouk\ProjectSetting\ProjectSettingServiceProvider',
         ];
 
         if ($forcePublish === true) {
