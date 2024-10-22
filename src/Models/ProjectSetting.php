@@ -155,11 +155,11 @@ class ProjectSetting extends Model
             case $keyObject->projectSettingType->name == 'image' :
                 return $keyObject->mainImage; 
 
-            case !$keyObject->non_translatable_value :
+            case $keyObject->non_translatable_value == null :
                 $value = $keyObject->tr('key_value', $locale) ?? $keyObject->tr('key_value', config('translatable.fallback_locale'));
                 return $withoutTags ? \strip_tags($value) : $value;
 
-            case $keyObject->non_translatable_value :
+            case $keyObject->non_translatable_value != null :
                 return $asInt ? (int) $keyObject->non_translatable_value : $keyObject->non_translatable_value;
                 
             default:
