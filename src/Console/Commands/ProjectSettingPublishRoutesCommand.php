@@ -56,10 +56,14 @@ class ProjectSettingPublishRoutesCommand extends Command
         }
 
         if ($alreadyPublished) {
-            $this->info("Routes have already been published in routes/{$routesPublishSubDirectory} directory.");
+            $this->warn("Routes have already been published in routes/{$routesPublishSubDirectory} directory.");
             return Command::SUCCESS;
         }
 
+        if (! $this->shouldPublishAlreadyLoadedRoutes()) {
+            $this->warn('Routes publishing is aborted.');
+            return Command::SUCCESS;
+        }
 
         foreach ($routes as $route) {
             $sourcePath = __DIR__ . "/../../routes/{$route}";
@@ -67,23 +71,25 @@ class ProjectSettingPublishRoutesCommand extends Command
             File::copy($sourcePath, $destinationPath);
         }
 
-        $this->publishConfiguration();
+        $this->callSilent('vendor:publish', [
+            '--provider' => 'Mabrouk\ProjectSetting\ProjectSettingServiceProvider',
+        ]);
+
+        exec('composer dump-autoload');
 
         $this->info('Routes have been published successfully.');
 
         return Command::SUCCESS;
     }
 
-    private function publishConfiguration($forcePublish = false)
+    private function shouldPublishAlreadyLoadedRoutes()
     {
-        $params = [
-            '--provider' => 'Mabrouk\ProjectSetting\ProjectSettingServiceProvider',
-        ];
-
-        if ($forcePublish === true) {
-            $params['--force'] = true;
+        if (config('project_settings.load_routes')) {
+            return $this->confirm(
+                'Loading routes is enabled in the configuration file. Do you want to publish them anyway?',
+                false
+            );
         }
-
-        $this->call('vendor:publish', $params, new \Symfony\Component\Console\Output\NullOutput());
+        return true;
     }
 }
