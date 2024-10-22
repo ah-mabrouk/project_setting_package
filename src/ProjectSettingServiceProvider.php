@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingInstallCommand;
+use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingPublishRoutesCommand;
 use Mabrouk\ProjectSetting\Console\Commands\ProjectSettingTypeUpdateCommand;
 
 class ProjectSettingServiceProvider extends ServiceProvider
@@ -53,6 +54,7 @@ class ProjectSettingServiceProvider extends ServiceProvider
             $this->commands([
                 ProjectSettingInstallCommand::class,
                 ProjectSettingTypeUpdateCommand::class,
+                ProjectSettingPublishRoutesCommand::class,
             ]);
 
             /**
@@ -83,11 +85,13 @@ class ProjectSettingServiceProvider extends ServiceProvider
 
     protected function registerRoutes()
     {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_admin_routes.php');
-            $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_client_routes.php');
-            $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_backend_routes.php');
-        });
+        if (config('project_settings.load_routes')) {
+            Route::group($this->routeConfiguration(), function () {
+                $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_admin_routes.php');
+                $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_client_routes.php');
+                $this->loadRoutesFrom(__DIR__ . '/routes/project_settings_backend_routes.php');
+            });
+        }
     }
 
     protected function routeConfiguration()
