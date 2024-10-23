@@ -27,7 +27,7 @@ class ProjectSettingTypeFactory extends Factory
         return [
             'name' => $this->faker->words(2, true),
             'validation_rules' => $this->faker->randomElement(['required|string|max:255', 'nullable|integer', 'required|email']),
-            'is_translatable' => $this->faker->boolean,
+            'is_translatable' => $this->faker->boolean(),
         ];
     }
 }

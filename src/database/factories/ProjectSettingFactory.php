@@ -30,9 +30,9 @@ class ProjectSettingFactory extends Factory
             'project_setting_section_id' => ProjectSettingGroup::factory(),
             'project_setting_type_id' => ProjectSettingType::factory(),
 
-            'key' => $this->faker->text,
-            'non_translatable_value' => $this->faker->text,
-            'custom_validation_rules' => $this->faker->text,
+            'key' => $this->faker->text(),
+            'non_translatable_value' => $this->faker->text(),
+            'custom_validation_rules' => $this->faker->text(),
 
             'is_visible' => 1,
             'is_editable' => 1,
@@ -47,13 +47,13 @@ class ProjectSettingFactory extends Factory
             $projectSetting->translate([
                 'name' => $this->faker->words(2, true),
                 'description' => $this->faker->text(),
-                'key_value' => $projectSetting->non_translatable_value != null ? $this->faker->text : null,
+                'key_value' => $projectSetting->non_translatable_value != null ? $this->faker->text() : null,
             ], 'en');
 
             $projectSetting->translate([
                 'name' => $this->faker->words(2, true),
                 'description' => $this->faker->text(),
-                'key_value' => $projectSetting->non_translatable_value != null ? $this->faker->text : null,
+                'key_value' => $projectSetting->non_translatable_value != null ? $this->faker->text() : null,
             ], 'ar');
         });
     }

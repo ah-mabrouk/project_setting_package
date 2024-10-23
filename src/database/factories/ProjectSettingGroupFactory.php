@@ -25,7 +25,7 @@ class ProjectSettingGroupFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->words(2, true),
+            'slug' => $this->faker->slug(),
             'is_visible' => $this->faker->boolean(70),
         ];
     }
