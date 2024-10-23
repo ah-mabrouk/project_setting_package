@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
 use Mabrouk\ProjectSetting\Traits\HasPhone;
 use Mabrouk\Translatable\Traits\Translatable;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProjectSetting extends Model
@@ -174,5 +175,15 @@ class ProjectSetting extends Model
                 $settingKey => self::key(key: $settingKey, locale: $locale)
             ];
         })->toArray();
-    }    
+    }
+    
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return \Mabrouk\ProjectSetting\Database\Factories\ProjectSettingFactory::new();
+    }
 }
