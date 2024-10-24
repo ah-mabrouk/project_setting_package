@@ -4,6 +4,7 @@ namespace Mabrouk\ProjectSetting\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProjectSettingType extends Model
@@ -38,5 +39,13 @@ class ProjectSettingType extends Model
     }
 
     ## Other Methods
-
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return \Mabrouk\ProjectSetting\Database\Factories\ProjectSettingTypeFactory::new();
+    }
 }
