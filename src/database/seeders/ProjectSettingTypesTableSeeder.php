@@ -64,7 +64,7 @@ class ProjectSettingTypesTableSeeder extends Seeder
             ],
             [
                 'name' => 'email',
-                'validation_rules' => 'sometimes|string|min:2|max:40000',
+                'validation_rules' => 'sometimes|email',
                 'is_translatable' => false,
             ],
         ];
