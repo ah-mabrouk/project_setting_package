@@ -62,6 +62,11 @@ class ProjectSettingTypesTableSeeder extends Seeder
                 ]),
                 'is_translatable' => false,
             ],
+            [
+                'name' => 'email',
+                'validation_rules' => 'sometimes|string|min:2|max:40000',
+                'is_translatable' => false,
+            ],
         ];
 
         $currentTypesInTable = ProjectSettingType::pluck('name')->flatten()->toArray();
