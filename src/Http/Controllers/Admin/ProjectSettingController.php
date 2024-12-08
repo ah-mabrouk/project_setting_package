@@ -24,7 +24,7 @@ class ProjectSettingController extends Controller
     public function index(ProjectSettingGroup $project_setting_group, ProjectSettingSection $project_setting_section, ProjectSettingFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSetting::class);
-        $projectSettings = ProjectSetting::visible()->filter($filters)->paginate($paginationLength);
+        $projectSettings = ProjectSetting::ofSection($project_setting_section->id)->visible()->filter($filters)->with(['projectSettingType', 'projectSettingSection', 'phone', 'media'])->paginate($paginationLength);
         return ProjectSettingResource::collection($projectSettings);
     }
 

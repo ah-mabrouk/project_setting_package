@@ -226,6 +226,28 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                             ],
                         ],
                     ],
+                    [
+                        'type_name' => 'email',
+                        'key' => 'example_setting_9',
+                        'non_translatable_value' => '',
+                        'custom_validation_rules' => '',
+                        'is_visible' => true,
+                        'is_editable' => true,
+                        'is_return_to_client' => false,
+
+                        'translation_data' => [
+                            'en' => [
+                                'name' => 'name example 9',
+                                'description' => 'description example 9',
+                                // 'key_value' => 'value example 9',
+                            ],
+                            'ar' => [
+                                'name' => 'مثال الاسم 9',
+                                'description' => 'مثال الوصف 9',
+                                // 'key_value' => 'مثال القيمة 9',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ]);
