@@ -49,6 +49,11 @@ class ProjectSettingGroup extends Model
 
     ## Query Scope Methods
 
+    public function scopeVisible($query, bool $visible = true)
+    {
+        return $query->where('is_visible', $visible);
+    }
+
     ## Other Methods
 
     public function remove()
