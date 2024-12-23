@@ -57,6 +57,10 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
             if (!$settingType) continue;
 
+            $existingSetting = $projectSettingSection->projectSettings()->where('key', $projectSettingData['key'])->first();
+
+            if ($existingSetting) continue;
+
             $setting = $projectSettingSection->projectSettings()
                 ->create(
                     \array_merge(
@@ -92,8 +96,6 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
     {
         ProjectSettingSection::truncate();
         ProjectSettingSectionTranslation::truncate();
-        ProjectSetting::truncate();
-        ProjectSettingTranslation::truncate();
 
         return true;
     }
