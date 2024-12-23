@@ -30,6 +30,7 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
         $allProjectSettingTypes = ProjectSettingType::all();
         $allProjectSettingGroups = ProjectSettingGroup::all();
+        $allProjectSettingItems = ProjectSetting::all();
         $fillableAttributes = (new ProjectSettingSection())->getFillable();
 
         for ($i = 0; $i < \count($projectSettingSections); $i++) {
@@ -42,7 +43,9 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
             );
 
             self::addModelTranslation($projectSettingSection, $projectSettingSections[$i]['translation_data']);
-            self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $projectSettingSections[$i]['settings']);
+
+            $settingItemsToBeAdded = collect($projectSettingSections[$i]['settings'])->whereNotIn('key', $allProjectSettingItems->pluck('key'))->toArray();
+            self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $settingItemsToBeAdded);
         }
 
         ProjectSetting::cache(true);
@@ -56,10 +59,6 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
             $settingType = $allProjectSettingTypes->where('name', $projectSettingData['type_name'])->first();
 
             if (!$settingType) continue;
-
-            $existingSetting = $projectSettingSection->projectSettings()->where('key', $projectSettingData['key'])->first();
-
-            if ($existingSetting) continue;
 
             $setting = $projectSettingSection->projectSettings()
                 ->create(
