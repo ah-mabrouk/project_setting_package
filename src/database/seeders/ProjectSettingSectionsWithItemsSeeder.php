@@ -9,8 +9,6 @@ use Mabrouk\ProjectSetting\Models\ProjectSetting;
 use Mabrouk\ProjectSetting\Models\ProjectSettingType;
 use Mabrouk\ProjectSetting\Models\ProjectSettingGroup;
 use Mabrouk\ProjectSetting\Models\ProjectSettingSection;
-use Mabrouk\ProjectSetting\Models\ProjectSettingTranslation;
-use Mabrouk\ProjectSetting\Models\ProjectSettingSectionTranslation;
 
 class ProjectSettingSectionsWithItemsSeeder extends Seeder
 {
@@ -26,8 +24,6 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
 
     public static function seedSections(array $projectSettingSections)
     {
-        if (!self::purgeCurrentSections()) return;
-
         $allProjectSettingTypes = ProjectSettingType::all();
         $allProjectSettingGroups = ProjectSettingGroup::all();
         $allProjectSettingItems = ProjectSetting::all();
@@ -89,14 +85,6 @@ class ProjectSettingSectionsWithItemsSeeder extends Seeder
         foreach ($translations as $locale => $translationData) {
             $model->translate($translationData, $locale);
         }
-    }
-
-    protected static function purgeCurrentSections(): bool
-    {
-        ProjectSettingSection::truncate();
-        ProjectSettingSectionTranslation::truncate();
-
-        return true;
     }
 
     protected static function filteredFillableProjectSettingSectionObjectData(array $fillables, array $projectSettingSectionData): array
