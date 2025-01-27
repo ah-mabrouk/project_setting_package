@@ -90,6 +90,11 @@ class ProjectSetting extends Model
         return $this->mainMedia;
     }
 
+    public function getClientValueAttribute()
+    {
+        return $this->is_displayed ? $this->value : null;
+    }
+
     ## Query Scope Methods
 
     public function scopeOfKey($query, $key = '')
