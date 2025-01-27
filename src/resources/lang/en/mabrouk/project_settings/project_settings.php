@@ -11,6 +11,7 @@ return [
         'editable' => 'editable',
         'return_to_client' => 'return to client',
         'displayed' => 'display item in website',
+        'admin_has_display_control' => 'admin has display control',
     ],
 
     'errors' => [
