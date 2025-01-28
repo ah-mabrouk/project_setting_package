@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('project_settings', function (Blueprint $table) {
+            $table->boolean('is_admin_has_display_control')->default(false)->after('is_return_to_client');
+            $table->boolean('is_displayed')->default(true)->after('is_admin_has_display_control');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('project_settings', function (Blueprint $table) {
+            $table->dropColumn('is_admin_has_display_control', 'is_displayed');
+        });
+    }
+};

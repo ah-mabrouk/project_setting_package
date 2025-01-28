@@ -21,7 +21,7 @@ class ProjectSettingResource extends JsonResource
             'key' => $this->key,
 
             'name' => $this->name,
-            'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->value),
+            'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->clientValue),
 
             // 'translatable' => $this->isTranslatable,
 
