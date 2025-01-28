@@ -32,10 +32,6 @@ class ProjectSettingUpdateRequest extends FormRequest
             'name' => 'sometimes|string|min:2|max:191',
             'description' => 'sometimes|string|min:2|max:191',
 
-            // 'custom_validation_rules' => 'sometimes|string|min:2|max:191',
-
-            // 'editable' => 'sometimes|boolean',
-            // 'return_to_client' => 'sometimes|boolean',
             'displayed' => [
                 'sometimes', 
                 'boolean',
@@ -68,9 +64,6 @@ class ProjectSettingUpdateRequest extends FormRequest
                 'non_translatable_value' => $this->exists('value') && (! $this->project_setting->isTranslatable) ? $this->value : $this->project_setting->non_translatable_value,
 
                 'is_displayed' => $this->exists('displayed') ? $this->displayed : $this->project_setting->is_displayed,
-                // 'custom_validation_rules' => $this->exists('custom_validation_rules') ? $this->custom_validation_rules : $this->project_setting->custom_validation_rules,
-                // 'is_editable' => $this->exists('editable') ? $this->is_editable : $this->project_setting->is_editable,
-                // 'is_return_to_client' => $this->exists('return_to_client') ? $this->is_return_to_client : $this->project_setting->is_return_to_client,
             ]);
             $this->updatePhone()
                 ->updateImage();
@@ -141,9 +134,6 @@ class ProjectSettingUpdateRequest extends FormRequest
             'name' => __('mabrouk/project_settings/project_settings.attributes.name'),
             'description' => __('mabrouk/project_settings/project_settings.attributes.description'),
             'displayed' => __('mabrouk/project_settings/project_settings.attributes.displayed'),
-            // 'custom_validation_rules' => __('mabrouk/project_settings/project_settings.attributes.custom_validation_rules'),
-            // 'editable' => __('mabrouk/project_settings/project_settings.attributes.editable'),
-            // 'return_to_client' => __('mabrouk/project_settings/project_settings.attributes.return_to_client'),
         ];
     }
 }
