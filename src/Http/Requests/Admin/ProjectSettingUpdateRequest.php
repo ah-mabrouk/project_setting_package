@@ -67,7 +67,7 @@ class ProjectSettingUpdateRequest extends FormRequest
                 'project_setting_section_id' => $this->exists('section') ? $this->section : $this->project_setting->project_setting_section_id,
                 'non_translatable_value' => $this->exists('value') && (! $this->project_setting->isTranslatable) ? $this->value : $this->project_setting->non_translatable_value,
 
-                'is_displayed' => $this->exists('displayed') ? $this->displayed : $this->project_setting->displayed,
+                'is_displayed' => $this->exists('displayed') ? $this->displayed : $this->project_setting->is_displayed,
                 // 'custom_validation_rules' => $this->exists('custom_validation_rules') ? $this->custom_validation_rules : $this->project_setting->custom_validation_rules,
                 // 'is_editable' => $this->exists('editable') ? $this->is_editable : $this->project_setting->is_editable,
                 // 'is_return_to_client' => $this->exists('return_to_client') ? $this->is_return_to_client : $this->project_setting->is_return_to_client,
