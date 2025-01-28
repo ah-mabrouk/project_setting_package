@@ -21,6 +21,7 @@ class ProjectSettingServiceProvider extends ServiceProvider
         'create_project_setting_types_table',
         'create_project_settings_table',
         'create_project_setting_translations_table',
+        'add_is_displayed_to_project_settings_table',
     ];
 
     private $packageSeeders = [

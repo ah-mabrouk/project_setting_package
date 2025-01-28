@@ -32,6 +32,8 @@ class ProjectSetting extends Model
         'is_visible',
         'is_editable',
         'is_return_to_client',
+        'is_admin_has_display_control',
+        'is_displayed',
     ];
 
     protected $with = [
@@ -75,6 +77,11 @@ class ProjectSetting extends Model
     public function getMainImageAttribute()
     {
         return $this->mainMedia;
+    }
+
+    public function getClientValueAttribute()
+    {
+        return $this->is_displayed ? $this->value : null;
     }
 
     ## Query Scope Methods

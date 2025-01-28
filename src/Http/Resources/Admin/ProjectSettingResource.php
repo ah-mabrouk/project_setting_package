@@ -27,6 +27,8 @@ class ProjectSettingResource extends JsonResource
             'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->value),
 
             'translatable' => $this->isTranslatable,
+            'admin_has_display_control' => $this->is_admin_has_display_control,
+            'displayed' => $this->is_displayed,
 
             'phone' => $this->when($this->projectSettingType->name == 'phone', new PhoneResource($this->phone)),
             'image' => $this->when($this->projectSettingType->name == 'image', new MediaResource($this->mainImage)),

@@ -17,5 +17,11 @@ return [
         ],
         'image' => 'image',
         'value' => 'value',
+        'displayed' => 'display item in website',
+        'admin_has_display_control' => 'admin has display control',
     ],
+
+    'errors' => [
+        'displayed_not_allowed' => 'You can edit this field if the admin have control over it',
+    ],    
 ];
