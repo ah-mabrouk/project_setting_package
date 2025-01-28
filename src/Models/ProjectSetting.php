@@ -45,17 +45,6 @@ class ProjectSetting extends Model
         return 'key';
     }
 
-    protected function casts(): array
-    {
-        return [
-            'is_visible' => 'boolean',
-            'is_editable' => 'boolean',
-            'is_return_to_client' => 'boolean',
-            'is_admin_has_display_control' => 'boolean',
-            'is_displayed' => 'boolean',
-        ];
-    }
-
     ## Relations
 
     public function projectSettingType()
