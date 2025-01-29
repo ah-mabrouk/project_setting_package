@@ -133,6 +133,11 @@ class ProjectSettingUpdateRequest extends FormRequest
             'section' => __('mabrouk/project_settings/project_settings.attributes.section'),
             'name' => __('mabrouk/project_settings/project_settings.attributes.name'),
             'description' => __('mabrouk/project_settings/project_settings.attributes.description'),
+            'phone' => __('mabrouk/project_settings/project_settings.attributes.phone.phone'),
+            'phone.number' => __('mabrouk/project_settings/project_settings.attributes.phone.number'),
+            'phone.country_code' => __('mabrouk/project_settings/project_settings.attributes.phone.country_code'),
+            'image' => __('mabrouk/project_settings/project_settings.attributes.image'),
+            'value' => __('mabrouk/project_settings/project_settings.attributes.value'),
             'displayed' => __('mabrouk/project_settings/project_settings.attributes.displayed'),
         ];
     }

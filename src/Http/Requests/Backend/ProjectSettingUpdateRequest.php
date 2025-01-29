@@ -141,6 +141,11 @@ class ProjectSettingUpdateRequest extends FormRequest
             'custom_validation_rules' => __('mabrouk/project_settings/project_settings.attributes.custom_validation_rules'),
             'editable' => __('mabrouk/project_settings/project_settings.attributes.editable'),
             'return_to_client' => __('mabrouk/project_settings/project_settings.attributes.return_to_client'),
+            'phone' => __('mabrouk/project_settings/project_settings.attributes.phone.phone'),
+            'phone.number' => __('mabrouk/project_settings/project_settings.attributes.phone.number'),
+            'phone.country_code' => __('mabrouk/project_settings/project_settings.attributes.phone.country_code'),
+            'image' => __('mabrouk/project_settings/project_settings.attributes.image'),
+            'value' => __('mabrouk/project_settings/project_settings.attributes.value'),
             'displayed' => __('mabrouk/project_settings/project_settings.attributes.displayed'),
             'admin_has_display_control' => __('mabrouk/project_settings/project_settings.attributes.admin_has_display_control'),
         ];
