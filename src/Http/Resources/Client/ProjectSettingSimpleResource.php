@@ -21,12 +21,20 @@ class ProjectSettingSimpleResource extends JsonResource
             'key' => $this->key,
 
             'name' => $this->name,
-            'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->value),
+            'value' => $this->when(! \in_array($this->projectSettingType->name, ['phone', 'image']), $this->clientValue),
 
             'translatable' => $this->isTranslatable,
 
-            'phone' => $this->when($this->projectSettingType->name == 'phone', new PhoneResource($this->phone)),
-            'image' => $this->when($this->projectSettingType->name == 'image', new MediaResource($this->mainImage)),
+            'displayed' => $this->is_displayed,
+
+            'phone' => $this->when(
+                $this->projectSettingType->name == 'phone' && $this->is_displayed, 
+                new PhoneResource($this->phone)
+            ),
+            'image' => $this->when(
+                $this->projectSettingType->name == 'image' && $this->is_displayed, 
+                new MediaResource($this->mainImage)
+            ),
             'type' => new ProjectSettingTypeResource($this->projectSettingType),
         ];
     }
