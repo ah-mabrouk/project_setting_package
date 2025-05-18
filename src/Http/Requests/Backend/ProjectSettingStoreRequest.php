@@ -93,7 +93,9 @@ class ProjectSettingStoreRequest extends FormRequest
             return (array) \json_decode($this->project_setting->validationRule);
         }
 
-        return ['value' => 'required|' . $this->custom_validation_rules ?? $this->projectSettingType->validation_rules];
+        $validationRules = $this->custom_validation_rules ?? $this->projectSettingType->validation_rules;
+
+        return ['value' => 'required|' . $validationRules];
     }
 
     public function attributes(): array
