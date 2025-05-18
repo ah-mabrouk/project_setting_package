@@ -2,6 +2,7 @@
 
 namespace Mabrouk\ProjectSetting\Http\Controllers\Backend;
 
+use Mabrouk\ProjectSetting\Http\Requests\Backend\ProjectSettingStoreRequest;
 use Mabrouk\ProjectSetting\Models\ProjectSetting;
 use Mabrouk\ProjectSetting\Models\ProjectSettingGroup;
 use Mabrouk\ProjectSetting\Http\Controllers\Controller;
@@ -26,6 +27,22 @@ class ProjectSettingController extends Controller
         $projectSettings = ProjectSetting::filter($filters)->with(['projectSettingType', 'projectSettingSection', 'phone', 'media'])->paginate($paginationLength);
         return ProjectSettingResource::collection($projectSettings);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Mabrouk\ProjectSetting\Http\Requests\Backend\ProjectSettingStoreRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ProjectSettingStoreRequest $request)
+    {
+        $projectSetting = $request->storeProjectSetting();
+        return response([
+            'message' => __('mabrouk/project_settings/project_settings.create'),
+            'project_setting' => new ProjectSettingResource($projectSetting),
+        ]);
+    }
+
 
     /**
      * Update the specified resource in storage.

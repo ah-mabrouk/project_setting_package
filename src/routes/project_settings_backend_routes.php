@@ -12,5 +12,5 @@ Route::group([
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]
 ], function () {
-    Route::apiResource('project-settings', ProjectSettingController::class)->only(['index', 'update']);
+    Route::apiResource('project-settings', ProjectSettingController::class)->except(['show', 'destroy']);
 });
