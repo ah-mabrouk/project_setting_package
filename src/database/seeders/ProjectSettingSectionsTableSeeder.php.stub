@@ -1,0 +1,48 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Database\Seeders\ProjectSettingSectionsSeeder;
+
+class ProjectSettingSectionsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        ProjectSettingSectionsSeeder::seedSections([
+            [
+                'group_slug' => 'group-one',
+                'key' => 'section-one',
+                'translation_data' => [
+                    'en' => [
+                        'name' => 'First Section',
+                        'description' => 'First Description',
+                    ],
+                    'ar' => [
+                        'name' => 'القطاع الأول',
+                        'description' => 'الوصف الأول',
+                    ],
+                ],
+            ],
+            [
+                'group_slug' => 'group-two',
+                'key' => 'section-two',
+                'translation_data' => [
+                    'en' => [
+                        'name' => 'Second Section',
+                        'description' => 'Second Description',
+                    ],
+                    'ar' => [
+                        'name' => 'القطاع الثاني',
+                        'description' => 'الوصف الثاني',
+                    ],
+                ],
+            ],
+        ]);
+    }
+}
