@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\ProjectSettingSectionsWithItemsSeeder;
+use Database\Seeders\ProjectSettingItemsSeeder;
 
-class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
+class ProjectSettingItemsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,19 +14,9 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
      */
     public function run()
     {
-        ProjectSettingSectionsWithItemsSeeder::seedSections([
+        ProjectSettingItemsSeeder::seedSections([
             [
-                'group_slug' => 'group-one',
-                'translation_data' => [
-                    'en' => [
-                        'name' => 'section one',
-                        'description' => 'description one',
-                    ],
-                    'ar' => [
-                        'name' => 'القطاع الأول',
-                        'description' => 'الوصف الأول',
-                    ],
-                ],
+                'section_key' => 'section-one',
                 'settings' => [
                     [
                         'type_name' => 'string',
@@ -53,17 +43,7 @@ class ProjectSettingSectionsWithSettingItemsSeeder extends Seeder
                 ],
             ],
             [
-                'group_slug' => 'group-two',
-                'translation_data' => [
-                    'en' => [
-                        'name' => 'section two',
-                        'description' => 'description two',
-                    ],
-                    'ar' => [
-                        'name' => 'القطاع الثاني',
-                        'description' => 'الوصف الثاني',
-                    ],
-                ],
+                'section_key' => 'section-two',
                 'settings' => [
                     [
                         'type_name' => 'text',
