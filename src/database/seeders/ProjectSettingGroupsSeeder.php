@@ -24,30 +24,15 @@ class ProjectSettingGroupsSeeder extends Seeder
         $fillableAttributes = (new ProjectSettingGroup())->getFillable();
 
         for ($i = 0; $i < \count($projectSettingGroups); $i++) {
-            if (! \in_array($projectSettingGroups[$i]['slug'], $currentProjectSettingGroupsInTable)) {
+
+            $projectSettingGroup = $projectSettingGroups[$i];
+            
+            if (! \in_array($projectSettingGroup['slug'], $currentProjectSettingGroupsInTable)) {
                 $projectSettingGroup = ProjectSettingGroup::create(
-                    self::filteredFillableProjectSettingGroupObjectData($fillableAttributes, $projectSettingGroups[$i])
+                    filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSettingGroup)
                 );
-                self::addGroupTranslation($projectSettingGroup, $projectSettingGroups[$i]['translation_data']);
+                addModelTranslation(model: $projectSettingGroup, translations: $projectSettingGroup['translation_data']);
             }
         }
-    }
-
-    protected static function addGroupTranslation(ProjectSettingGroup $projectSettingGroup, array $translations)
-    {
-        foreach ($translations as $locale => $translationData) {
-            $projectSettingGroup->translate($translationData, $locale);
-        }
-    }
-
-    protected static function filteredFillableProjectSettingGroupObjectData(array $fillables, array $projectSettingGroupData): array
-    {
-        return \array_filter(
-            $projectSettingGroupData,
-            function ($attribute) use ($fillables) {
-                return \in_array($attribute, $fillables);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
     }
 }

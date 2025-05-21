@@ -31,14 +31,14 @@ class ProjectSettingSectionsSeeder extends Seeder
             $projectSectionData = $projectSettingSections[$i];
             $sectionGroup = $allProjectSettingGroups->where('slug', $projectSectionData['group_slug'])->first();
 
-            if (!$sectionGroup || \in_array($projectSectionData['key'], $currentProjectSettingSectionsInTable)) 
-                continue;
-                    
-            $projectSettingSection = $sectionGroup->projectSettingSections()->create(
-                    filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSectionData)
-            );
+            if ($sectionGroup && !\in_array($projectSectionData['key'], $currentProjectSettingSectionsInTable)) {
 
-            addModelTranslation(model: $projectSettingSection, translations: $projectSectionData['translation_data']);
+                $projectSettingSection = $sectionGroup->projectSettingSections()->create(
+                    filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSectionData)
+                );
+    
+                addModelTranslation(model: $projectSettingSection, translations: $projectSectionData['translation_data']);
+            }
         }
     }
 }
