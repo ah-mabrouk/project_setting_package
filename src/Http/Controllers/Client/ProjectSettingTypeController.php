@@ -12,20 +12,21 @@ class ProjectSettingTypeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Filters\Client\ProjectSettingTypeFilter  $filters
+     * @param ProjectSettingTypeFilter $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingTypeFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSettingType::class);
         $ProjectSettingTypes = ProjectSettingType::filter($filters)->paginate($paginationLength);
+
         return ProjectSettingTypeResource::collection($ProjectSettingTypes);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingType  $ProjectSettingType
+     * @param ProjectSettingType $ProjectSettingType
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSettingType $ProjectSettingType)

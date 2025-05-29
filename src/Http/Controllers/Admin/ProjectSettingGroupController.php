@@ -14,25 +14,27 @@ class ProjectSettingGroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Filters\Admin\ProjectSettingGroupFilter  $filters
+     * @param ProjectSettingGroupFilter $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingGroupFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSettingGroup::class);
         $projectSettingGroups = ProjectSettingGroup::visible()->filter($filters)->paginate($paginationLength);
+
         return ProjectSettingGroupResource::collection($projectSettingGroups);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Mabrouk\ProjectSetting\Http\Requests\Admin\ProjectSettingGroupStoreRequest  $request
+     * @param ProjectSettingGroupStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProjectSettingGroupStoreRequest $request)
     {
         $projectSettingGroup = $request->storeProjectSettingGroup();
+
         return response([
             'message' => __('mabrouk/project_settings/project_setting_groups.store'),
             'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
@@ -42,7 +44,7 @@ class ProjectSettingGroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
+     * @param ProjectSettingGroup $project_setting_group
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSettingGroup $project_setting_group)
@@ -55,13 +57,14 @@ class ProjectSettingGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Mabrouk\ProjectSetting\Http\Requests\Admin\ProjectSettingGroupUpdateRequest  $request
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
+     * @param ProjectSettingGroupUpdateRequest $request
+     * @param ProjectSettingGroup $project_setting_group
      * @return \Illuminate\Http\Response
      */
     public function update(ProjectSettingGroupUpdateRequest $request, ProjectSettingGroup $project_setting_group)
     {
         $projectSettingGroup = $request->updateProjectSettingGroup();
+
         return response([
             'message' => __('mabrouk/project_settings/project_setting_groups.update'),
             'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
@@ -71,12 +74,12 @@ class ProjectSettingGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
+     * @param ProjectSettingGroup $project_setting_group
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProjectSettingGroup $project_setting_group)
     {
-        if (! $project_setting_group->remove()) {
+        if (!$project_setting_group->remove()) {
             return response([
                 'message' => __('mabrouk/project_settings/project_setting_groups.cant_destroy'),
             ], 409);

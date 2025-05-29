@@ -12,20 +12,21 @@ class ProjectSettingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Filters\Client\ProjectSettingFilter  $filters
+     * @param ProjectSettingFilter $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSetting::class);
         $projectSettings = ProjectSetting::returnToClient()->visible()->filter($filters)->with(['projectSettingType', 'phone', 'media'])->paginate($paginationLength);
+
         return ProjectSettingResource::collection($projectSettings);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSetting  $project_setting
+     * @param ProjectSetting $project_setting
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSetting $project_setting)

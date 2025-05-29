@@ -2,6 +2,7 @@
 
 return [
     'update' => 'Project setting updated successfully',
+    'store' => 'Project setting created successfully',
 
     'attributes' => [
         'section' => 'project setting section',
@@ -19,6 +20,7 @@ return [
         'value' => 'value',
         'displayed' => 'display item in website',
         'admin_has_display_control' => 'admin has display control',
+        'visible' => 'visible',
     ],
 
     'errors' => [

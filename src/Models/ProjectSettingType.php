@@ -18,7 +18,7 @@ class ProjectSettingType extends Model
         'is_translatable',
     ];
 
-    protected $castes = [
+    protected $casts = [
         'is_translatable' => 'boolean',
     ];
 
