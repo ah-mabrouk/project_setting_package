@@ -22,54 +22,26 @@ class ProjectSettingPublishRoutesCommand extends Command
     protected $description = 'Publish the routes for the Project Setting package';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        $routesPublishSubDirectory = config('project_settings.routes_publish_subdirectory');
+        $routesPublishSubDirectory = $this->getRoutesPublishSubDirectory();
+        $routeFiles = $this->getRouteFiles();
 
-        $routes = [
-            'project_settings_admin_routes.php',
-            'project_settings_client_routes.php',
-            'project_settings_backend_routes.php',
-        ];
-
-        $alreadyPublished = true;
-
-        foreach ($routes as $route) {
-            if (!File::exists(base_path("routes/{$routesPublishSubDirectory}{$route}"))) {
-                $alreadyPublished = false;
-                break;
-            }
-        }
-
-        if ($alreadyPublished) {
+        if ($this->areRoutesAlreadyPublished($routeFiles, $routesPublishSubDirectory)) {
             $this->warn("Routes have already been published in routes/{$routesPublishSubDirectory} directory.");
             return Command::SUCCESS;
         }
 
-        if (! $this->shouldPublishAlreadyLoadedRoutes()) {
+        if (!$this->shouldPublishAlreadyLoadedRoutes()) {
             $this->warn('Routes publishing is aborted.');
             return Command::SUCCESS;
         }
 
-        foreach ($routes as $route) {
-            $sourcePath = __DIR__ . "/../../routes/{$route}";
-            $destinationPath = base_path("routes/{$routesPublishSubDirectory}{$route}");
-            File::copy($sourcePath, $destinationPath);
-        }
+        $this->publishRouteFiles($routeFiles, $routesPublishSubDirectory);
 
         $this->callSilent('vendor:publish', [
             '--provider' => 'Mabrouk\ProjectSetting\ProjectSettingServiceProvider',
@@ -82,14 +54,81 @@ class ProjectSettingPublishRoutesCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function shouldPublishAlreadyLoadedRoutes()
+    /**
+     * Get the routes publish subdirectory from config.
+     *
+     * @return string
+     */
+    private function getRoutesPublishSubDirectory(): string
+    {
+        return config('project_settings.routes_publish_subdirectory');
+    }
+
+    /**
+     * Get the list of route files to be published.
+     *
+     * @return array
+     */
+    private function getRouteFiles(): array
+    {
+        $routesPath = __DIR__ . '/../../routes';
+        $files = File::files($routesPath);
+
+        return collect($files)
+            ->filter(function ($file) {
+                return pathinfo($file, PATHINFO_EXTENSION) === 'php';
+            })
+            ->map(function ($file) {
+                return $file->getFilename();
+            })
+            ->toArray();
+    }
+
+    /**
+     * Check if routes are already published.
+     *
+     * @param array $routeFiles
+     * @param string $routesPublishSubDirectory
+     * @return bool
+     */
+    private function areRoutesAlreadyPublished(array $routeFiles, string $routesPublishSubDirectory): bool
+    {
+        foreach ($routeFiles as $routeFile) {
+            if (!File::exists(base_path("routes/{$routesPublishSubDirectory}{$routeFile}"))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine if routes should be published when they are already loaded.
+     *
+     * @return bool
+     */
+    private function shouldPublishAlreadyLoadedRoutes(): bool
     {
         if (config('project_settings.load_routes')) {
-            return $this->confirm(
-                'Loading routes is enabled in the configuration file. Do you want to publish them anyway?',
-                false
-            );
+            return $this->confirm('Loading routes is enabled in the configuration file. Do you want to publish them anyway?');
         }
+
         return true;
+    }
+
+    /**
+     * Publish route files to the destination directory.
+     *
+     * @param array $routeFiles
+     * @param string $routesPublishSubDirectory
+     * @return void
+     */
+    private function publishRouteFiles(array $routeFiles, string $routesPublishSubDirectory): void
+    {
+        foreach ($routeFiles as $routeFile) {
+            $sourcePath = __DIR__ . "/../../routes/{$routeFile}";
+            $destinationPath = base_path("routes/{$routesPublishSubDirectory}{$routeFile}");
+            File::copy($sourcePath, $destinationPath);
+        }
     }
 }
