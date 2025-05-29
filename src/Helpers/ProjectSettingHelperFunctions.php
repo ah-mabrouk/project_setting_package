@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Get class name of passed string with options.
@@ -76,5 +77,27 @@ if (!function_exists('format_json_strings_to_boolean')) {
             }
         }
         return $fieldsToBeMerged;
+    }
+}
+
+if (!function_exists('filteredFillableModelObjectData')) {
+    function filteredFillableModelObjectData(array $actualModelFillable, array $receivedData): array
+    {
+        return \array_filter(
+            $receivedData,
+            function ($attribute) use ($actualModelFillable) {
+                return \in_array($attribute, $actualModelFillable);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+    }
+}
+
+if (!function_exists('addModelTranslation')) {
+    function addModelTranslation(Model $model, array $translations): void
+    {
+        foreach ($translations as $locale => $translationData) {
+            $model->translate($translationData, $locale);
+        }
     }
 }

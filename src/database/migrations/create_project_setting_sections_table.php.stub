@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('project_setting_sections', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_setting_group_id');
+            $table->string('key')->unique();
 
             $table->timestamps();
         });
