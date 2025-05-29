@@ -26,6 +26,7 @@ class ProjectSettingServiceProvider extends ServiceProvider
 
     private $packageSeeders = [
         'ProjectSettingGroupsTableSeeder',
+        'ProjectSettingSectionsTableSeeder',
         'ProjectSettingItemsTableSeeder',
     ];
 
