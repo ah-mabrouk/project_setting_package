@@ -13,22 +13,23 @@ class ProjectSettingSectionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
-     * @param  \Mabrouk\ProjectSetting\Filters\Client\ProjectSettingSectionFilter  $filters
+     * @param ProjectSettingGroup $project_setting_group
+     * @param ProjectSettingSectionFilter $filters
      * @return \Illuminate\Http\Response
      */
     public function index(ProjectSettingGroup $project_setting_group, ProjectSettingSectionFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSettingSection::class);
         $projectSettingSections = $project_setting_group->projectSettingSections()->filter($filters)->with(['projectSettingGroup', 'projectSettings'])->paginate($paginationLength);
+
         return ProjectSettingSectionResource::collection($projectSettingSections);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingGroup  $project_setting_group
-     * @param  \Mabrouk\ProjectSetting\Models\ProjectSettingSection  $project_setting_section
+     * @param ProjectSettingGroup $project_setting_group
+     * @param ProjectSettingSection $project_setting_section
      * @return \Illuminate\Http\Response
      */
     public function show(ProjectSettingGroup $project_setting_group, ProjectSettingSection $project_setting_section)

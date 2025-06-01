@@ -56,7 +56,7 @@ class ProjectSettingStoreRequest extends FormRequest
             'project_setting_section_id' => $this->section,
             'project_setting_type_id' => $this->type,
             'key' => $this->key,
-            'non_translatable_value' => $this->exists('value') && (! $this->projectSettingType->is_translatable) ? $this->value : null,
+            'non_translatable_value' => $this->exists('non_translatable_value') && (! $this->projectSettingType->is_translatable) ? $this->non_translatable_value : null,
             'custom_validation_rules' => $this->custom_validation_rules,
             'is_visible' => $this->visible,
             'is_editable' => $this->editable,
@@ -66,7 +66,7 @@ class ProjectSettingStoreRequest extends FormRequest
         ]);
 
         if ($this->exists('phone')) {
-            $projectSetting->addPhone(\array_merge($this->phone, ['type' => Str::slug($this->project_setting->name, '_')]));
+            $projectSetting->addPhone($this->phone);
         }
 
         if ($this->exists('image')) {
@@ -89,11 +89,11 @@ class ProjectSettingStoreRequest extends FormRequest
 
     protected function valueValidationRules(): array
     {
-        if (\in_array($this->projectSettingType->name, ['phone', 'image'])) {
-            return (array) \json_decode($this->project_setting->validationRule);
+        if (\in_array($this->projectSettingType?->name, ['phone', 'image'])) {
+            return (array) \json_decode($this->projectSettingType->validation_rules);
         }
 
-        $validationRules = $this->custom_validation_rules ?? $this->projectSettingType->validation_rules;
+        $validationRules = $this->custom_validation_rules ?? $this->projectSettingType?->validation_rules;
 
         return ['value' => 'required|' . $validationRules];
     }
