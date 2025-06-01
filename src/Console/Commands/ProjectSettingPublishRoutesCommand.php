@@ -71,17 +71,11 @@ class ProjectSettingPublishRoutesCommand extends Command
      */
     private function getRouteFiles(): array
     {
-        $routesPath = __DIR__ . '/../../routes';
-        $files = File::files($routesPath);
-
-        return collect($files)
-            ->filter(function ($file) {
-                return pathinfo($file, PATHINFO_EXTENSION) === 'php';
-            })
-            ->map(function ($file) {
-                return $file->getFilename();
-            })
-            ->toArray();
+        return [
+            'project_settings_admin_routes.php',
+            'project_settings_client_routes.php',
+            'project_settings_backend_routes.php',
+        ];
     }
 
     /**
@@ -110,7 +104,7 @@ class ProjectSettingPublishRoutesCommand extends Command
     private function shouldPublishAlreadyLoadedRoutes(): bool
     {
         if (config('project_settings.load_routes')) {
-            return $this->confirm('Loading routes is enabled in the configuration file. Do you want to publish them anyway?');
+            return $this->confirm('Loading routes is enabled in the configuration file. Do you want to publish them anyway?', false);
         }
 
         return true;
