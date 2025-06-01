@@ -71,7 +71,7 @@ class ProjectSettingInstallCommand extends Command
      */
     private function shouldOverwriteConfig(): bool
     {
-        return $this->confirm('Config file already exists. Do you want to overwrite it?');
+        return $this->confirm('Config file already exists. Do you want to overwrite it?', false);
     }
 
     /**
