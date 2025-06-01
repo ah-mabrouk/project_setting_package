@@ -127,27 +127,45 @@ class ProjectSettingServiceProvider extends ServiceProvider
         return $seedersFiles;
     }
 
-    protected function migrationExists($migrationName)
+    /**
+     * Check if a file exists in a directory by partial name match.
+     *
+     * @param string $path The directory path to search in
+     * @param string $fileName The partial file name to search for
+     * @return bool
+     */
+    protected function fileExistsInDirectory(string $path, string $fileName): bool
     {
-        $path = database_path('migrations/');
         $files = \scandir($path);
-        $pos = false;
-        foreach ($files as &$value) {
-            $pos = \strpos($value, $migrationName);
-            if ($pos !== false) return true;
+
+        foreach ($files as $value) {
+            if (\strpos($value, $fileName) !== false) {
+                return true;
+            }
         }
+
         return false;
     }
 
-    protected function seederExists($seederName)
+    /**
+     * Check if a migration exists.
+     *
+     * @param string $migrationName The migration name to check
+     * @return bool
+     */
+    protected function migrationExists(string $migrationName): bool
     {
-        $path = database_path('seeders/');
-        $files = \scandir($path);
-        $pos = false;
-        foreach ($files as &$value) {
-            $pos = \strpos($value, $seederName);
-            if ($pos !== false) return true;
-        }
-        return false;
+        return $this->fileExistsInDirectory(database_path('migrations/'), $migrationName);
+    }
+
+    /**
+     * Check if a seeder exists.
+     *
+     * @param string $seederName The seeder name to check
+     * @return bool
+     */
+    protected function seederExists(string $seederName): bool
+    {
+        return $this->fileExistsInDirectory(database_path('seeders/'), $seederName);
     }
 }
