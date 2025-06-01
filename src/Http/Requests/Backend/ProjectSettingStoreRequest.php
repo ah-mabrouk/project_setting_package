@@ -89,11 +89,11 @@ class ProjectSettingStoreRequest extends FormRequest
 
     protected function valueValidationRules(): array
     {
-        if (\in_array($this->projectSettingType->name, ['phone', 'image'])) {
+        if (\in_array($this->projectSettingType?->name, ['phone', 'image'])) {
             return (array) \json_decode($this->projectSettingType->validation_rules);
         }
 
-        $validationRules = $this->custom_validation_rules ?? $this->projectSettingType->validation_rules;
+        $validationRules = $this->custom_validation_rules ?? $this->projectSettingType?->validation_rules;
 
         return ['value' => 'required|' . $validationRules];
     }
