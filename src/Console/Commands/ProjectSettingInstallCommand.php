@@ -101,7 +101,7 @@ class ProjectSettingInstallCommand extends Command
     private function runMigration(): void
     {
         $this->warn('Make sure to set package configuration before migration or you will need to run this command again');
-        if (!$this->confirm('Do you want to run migrate command now?')) return;
+        if (!$this->confirm('Do you want to run migrate command now?', false)) return;
 
         $this->migratePackageTables();
     }
@@ -122,7 +122,7 @@ class ProjectSettingInstallCommand extends Command
         $migrationSubFolder = $this->getMigrationSubFolder();
 
         // If no specific connections are defined, migrate to the default connection
-        if (count($dbConnections) === 0) {
+        if (count($dbConnections) == 0) {
             $this->migrateToDatabaseConnection($migrationSubFolder);
             return;
         }
