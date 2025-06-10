@@ -24,20 +24,24 @@ class ProjectSettingSectionsSeeder extends Seeder
 
         $currentProjectSettingSectionsInTable = ProjectSettingSection::pluck('key')->flatten()->toArray();
 
-        $fillableAttributes = (new ProjectSettingGroup())->getFillable();
+        $fillableAttributes = (new ProjectSettingSection())->getFillable();
 
         for ($i = 0; $i < \count($projectSettingSections); $i++) {
             
-            $projectSectionData = $projectSettingSections[$i];
-            $sectionGroup = $allProjectSettingGroups->where('slug', $projectSectionData['group_slug'])->first();
+            $projectGroupData = $projectSettingSections[$i];
+            $sectionGroup = $allProjectSettingGroups->where('slug', $projectGroupData['group_slug'])->first();
 
-            if ($sectionGroup && !\in_array($projectSectionData['key'], $currentProjectSettingSectionsInTable)) {
+            if ($sectionGroup) {
 
-                $projectSettingSection = $sectionGroup->projectSettingSections()->create(
-                    filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSectionData)
-                );
-    
-                addModelTranslation(model: $projectSettingSection, translations: $projectSectionData['translation_data']);
+                for ($j = 0; $j < \count($projectGroupData['sections']); $j++):
+                    $projectSectionData = $projectGroupData['sections'][$j];
+                    if (!\in_array($projectSectionData['key'], $currentProjectSettingSectionsInTable)):
+                        $projectSettingSection = $sectionGroup->projectSettingSections()->create(
+                            filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSectionData)
+                        );
+                        addModelTranslation(model: $projectSettingSection, translations: $projectSectionData['translation_data']);
+                    endif;
+                endfor;
             }
         }
     }
