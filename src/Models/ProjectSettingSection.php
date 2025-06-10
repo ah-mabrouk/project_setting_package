@@ -19,6 +19,7 @@ class ProjectSettingSection extends Model
     protected $fillable = [
         'id',
         'project_setting_group_id',
+        'key',
     ];
 
     protected $with = [
