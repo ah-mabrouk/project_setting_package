@@ -26,12 +26,12 @@ class ProjectSettingGroupsSeeder extends Seeder
         for ($i = 0; $i < \count($projectSettingGroups); $i++) {
 
             $projectSettingGroup = $projectSettingGroups[$i];
-            
+
             if (! \in_array($projectSettingGroup['slug'], $currentProjectSettingGroupsInTable)) {
-                $projectSettingGroup = ProjectSettingGroup::create(
+                $newProjectSettingGroup = ProjectSettingGroup::create(
                     filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSettingGroup)
                 );
-                addModelTranslation(model: $projectSettingGroup, translations: $projectSettingGroup['translation_data']);
+                addModelTranslation(model: $newProjectSettingGroup, translations: $projectSettingGroup['translation_data']);
             }
         }
     }

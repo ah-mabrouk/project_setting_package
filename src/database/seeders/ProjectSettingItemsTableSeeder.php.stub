@@ -14,7 +14,7 @@ class ProjectSettingItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        ProjectSettingItemsSeeder::seedSections([
+        ProjectSettingItemsSeeder::seedItems([
             [
                 'section_key' => 'section-one',
                 'settings' => [

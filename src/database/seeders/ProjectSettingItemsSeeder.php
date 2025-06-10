@@ -20,10 +20,10 @@ class ProjectSettingItemsSeeder extends Seeder
         //
     }
 
-    public static function seedSections(array $projectSettingItems)
+    public static function seedItems(array $projectSettingItems)
     {
         $allProjectSettingTypes = ProjectSettingType::all();
-        $allProjectSettingSections = ProjectSettingSection::all()->pluck('key');
+        $allProjectSettingSections = ProjectSettingSection::all();
         $currentProjectSettingKeys = ProjectSetting::all()->pluck('key');
 
         for ($i = 0; $i < \count($projectSettingItems); $i++) {
@@ -33,8 +33,8 @@ class ProjectSettingItemsSeeder extends Seeder
             $projectSettingSection = $allProjectSettingSections->where('key', $sectionData['section_key'])->first();
 
             if ($projectSettingSection) {
-                $settingItemsToBeAdded = collect($sectionData[$i]['settings'])->whereNotIn('key', $currentProjectSettingKeys)->toArray();
-    
+                $settingItemsToBeAdded = collect($sectionData['settings'])->whereNotIn('key', $currentProjectSettingKeys)->toArray();
+
                 self::addSectionSettings($allProjectSettingTypes, $projectSettingSection, $settingItemsToBeAdded);
             }
         }
@@ -49,13 +49,14 @@ class ProjectSettingItemsSeeder extends Seeder
         foreach ($projectSettings as $projectSettingData) {
             $settingType = $allProjectSettingTypes->where('name', $projectSettingData['type_name'])->first();
 
-            if (!$settingType) {
-
+            
+            if ($settingType) {
+                
                 $settingItemData = \array_merge(
                     ['project_setting_type_id' => $settingType->id],
                     filteredFillableModelObjectData(actualModelFillable: $fillableAttributes, receivedData: $projectSettingData)
                 );
-
+                
                 $setting = $projectSettingSection->projectSettings()->create($settingItemData);
                 self::addProjectSettingRelatedObjects($setting, $projectSettingData);
             }
