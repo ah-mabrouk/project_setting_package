@@ -36,7 +36,7 @@ class ProjectSettingController extends Controller
         $projectSetting = $request->storeProjectSetting();
 
         return response([
-            'message' => __('mabrouk/project_settings/project_settings.create'),
+            'message' => __('mabrouk/project_settings/project_settings.store'),
             'project_setting' => new ProjectSettingResource($projectSetting),
         ]);
     }
