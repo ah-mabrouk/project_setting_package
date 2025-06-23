@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Mabrouk\Mediable\Traits\Mediable;
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
+use Mabrouk\ProjectSetting\database\factories\ProjectSettingFactory;
 use Mabrouk\ProjectSetting\Traits\HasPhone;
 use Mabrouk\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -191,6 +192,6 @@ class ProjectSetting extends Model
      */
     protected static function newFactory(): Factory
     {
-        return \Mabrouk\ProjectSetting\Database\Factories\ProjectSettingFactory::new();
+        return ProjectSettingFactory::new();
     }
 }
