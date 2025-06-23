@@ -12,7 +12,7 @@ class ProjectSettingPublishRoutesCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'setting:publish-routes';
+    protected $signature = 'setting:publish-routes {--force : Overwrite existing published route files}';
 
     /**
      * The console command description.
@@ -31,7 +31,7 @@ class ProjectSettingPublishRoutesCommand extends Command
         $routesPublishSubDirectory = $this->getRoutesPublishSubDirectory();
         $routeFiles = $this->getRouteFiles();
 
-        if ($this->areRoutesAlreadyPublished($routeFiles, $routesPublishSubDirectory)) {
+        if (!$this->option('force') && $this->areRoutesAlreadyPublished($routeFiles, $routesPublishSubDirectory)) {
             $this->warn("Routes have already been published in routes/{$routesPublishSubDirectory} directory.");
             return Command::SUCCESS;
         }
