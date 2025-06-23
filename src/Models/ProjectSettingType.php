@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mabrouk\ProjectSetting\database\factories\ProjectSettingTypeFactory;
 
 class ProjectSettingType extends Model
 {
@@ -46,6 +47,6 @@ class ProjectSettingType extends Model
      */
     protected static function newFactory(): Factory
     {
-        return \Mabrouk\ProjectSetting\Database\Factories\ProjectSettingTypeFactory::new();
+        return ProjectSettingTypeFactory::new();
     }
 }

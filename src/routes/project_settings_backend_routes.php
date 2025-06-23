@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Mabrouk\ProjectSetting\Http\Controllers\Backend\ProjectSettingController;
+use Mabrouk\ProjectSetting\Http\Controllers\Backend\ProjectSettingSectionController;
 
 Route::group([
     'namespace' => 'Backend',
@@ -13,4 +14,5 @@ Route::group([
     ]
 ], function () {
     Route::apiResource('project-settings', ProjectSettingController::class)->except(['show', 'destroy']);
+    Route::apiResource('project-setting-groups.project-setting-sections', ProjectSettingSectionController::class)->scoped();
 });

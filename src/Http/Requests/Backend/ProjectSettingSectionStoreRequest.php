@@ -1,6 +1,6 @@
 <?php
 
-namespace Mabrouk\ProjectSetting\Http\Requests\Admin;
+namespace Mabrouk\ProjectSetting\Http\Requests\Backend;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,7 +25,7 @@ class ProjectSettingSectionStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'key' => 'sometimes|string|unique:project_setting_sections,key',

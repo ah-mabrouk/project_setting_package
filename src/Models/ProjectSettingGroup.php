@@ -4,6 +4,7 @@ namespace Mabrouk\ProjectSetting\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Mabrouk\Filterable\Traits\Filterable;
+use Mabrouk\ProjectSetting\database\factories\ProjectSettingGroupFactory;
 use Mabrouk\Translatable\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -71,6 +72,6 @@ class ProjectSettingGroup extends Model
      */
     protected static function newFactory(): Factory
     {
-        return \Mabrouk\ProjectSetting\Database\Factories\ProjectSettingGroupFactory::new();
+        return ProjectSettingGroupFactory::new();
     }    
 }
