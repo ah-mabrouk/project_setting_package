@@ -149,9 +149,9 @@ class ProjectSetting extends Model
         Cache::forget('project_settings');
     }
 
-    public static function key($key, string $locale = 'en', bool $asInt = false, bool $withoutTags = true)
+    public static function key($key, ?string $locale = null, bool $asInt = false, bool $withoutTags = true)
     {
-        $locale = request()->header('X-locale') ?? $locale;
+        $locale = $locale ?? request()->header('X-locale') ?? app()->getLocale();
         $keyObject = self::cache()->where('key', $key)->first();
         
         switch (true) {
@@ -176,7 +176,7 @@ class ProjectSetting extends Model
         }
     }
 
-    public static function keys(array $keys, $locale = 'en')
+    public static function keys(array $keys, ?string $locale = null)
     {
         return collect($keys)->mapWithKeys(function($settingKey) use ($locale) {
             return [
