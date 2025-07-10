@@ -2,7 +2,6 @@
 
 namespace Mabrouk\ProjectSetting\Http\Resources\Backend;
 
-use App\Http\Resources\Admin\PhoneResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Mabrouk\Mediable\Http\Resources\MediaResource;
 
