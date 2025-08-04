@@ -20,26 +20,26 @@ class ProjectSettingGroupController extends Controller
     public function index(ProjectSettingGroupFilter $filters)
     {
         $paginationLength = pagination_length(ProjectSettingGroup::class);
-        $projectSettingGroups = ProjectSettingGroup::visible()->filter($filters)->paginate($paginationLength);
+        $projectSettingGroups = ProjectSettingGroup::visible()->filter($filters)->with('translations')->paginate($paginationLength);
 
         return ProjectSettingGroupResource::collection($projectSettingGroups);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param ProjectSettingGroupStoreRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ProjectSettingGroupStoreRequest $request)
-    {
-        $projectSettingGroup = $request->storeProjectSettingGroup();
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param ProjectSettingGroupStoreRequest $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(ProjectSettingGroupStoreRequest $request)
+    // {
+    //     $projectSettingGroup = $request->storeProjectSettingGroup();
 
-        return response([
-            'message' => __('mabrouk/project_settings/project_setting_groups.store'),
-            'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
-        ]);
-    }
+    //     return response([
+    //         'message' => __('mabrouk/project_settings/project_setting_groups.store'),
+    //         'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
+    //     ]);
+    // }
 
     /**
      * Display the specified resource.
@@ -54,39 +54,39 @@ class ProjectSettingGroupController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param ProjectSettingGroupUpdateRequest $request
-     * @param ProjectSettingGroup $project_setting_group
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ProjectSettingGroupUpdateRequest $request, ProjectSettingGroup $project_setting_group)
-    {
-        $projectSettingGroup = $request->updateProjectSettingGroup();
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param ProjectSettingGroupUpdateRequest $request
+    //  * @param ProjectSettingGroup $project_setting_group
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(ProjectSettingGroupUpdateRequest $request, ProjectSettingGroup $project_setting_group)
+    // {
+    //     $projectSettingGroup = $request->updateProjectSettingGroup();
 
-        return response([
-            'message' => __('mabrouk/project_settings/project_setting_groups.update'),
-            'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
-        ]);
-    }
+    //     return response([
+    //         'message' => __('mabrouk/project_settings/project_setting_groups.update'),
+    //         'project_setting_group' => new ProjectSettingGroupResource($projectSettingGroup),
+    //     ]);
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param ProjectSettingGroup $project_setting_group
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProjectSettingGroup $project_setting_group)
-    {
-        if (!$project_setting_group->remove()) {
-            return response([
-                'message' => __('mabrouk/project_settings/project_setting_groups.cant_destroy'),
-            ], 409);
-        }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param ProjectSettingGroup $project_setting_group
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(ProjectSettingGroup $project_setting_group)
+    // {
+    //     if (!$project_setting_group->remove()) {
+    //         return response([
+    //             'message' => __('mabrouk/project_settings/project_setting_groups.cant_destroy'),
+    //         ], 409);
+    //     }
 
-        return response([
-            'message' => __('mabrouk/project_settings/project_setting_groups.destroy'),
-        ]);
-    }
+    //     return response([
+    //         'message' => __('mabrouk/project_settings/project_setting_groups.destroy'),
+    //     ]);
+    // }
 }
