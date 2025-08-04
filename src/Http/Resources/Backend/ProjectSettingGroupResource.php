@@ -4,7 +4,7 @@ namespace Mabrouk\ProjectSetting\Http\Resources\Backend;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectSettingGroupSimpleResource extends JsonResource
+class ProjectSettingGroupResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,6 +22,8 @@ class ProjectSettingGroupSimpleResource extends JsonResource
             'description' => $this->description,
 
             'visible' => $this->is_visible,
+
+            // 'sections' => ProjectSettingSectionResource::collection($this->projectSettingSections),
         ];
     }
 }
