@@ -1,6 +1,6 @@
 <?php
 
-namespace Mabrouk\ProjectSetting\Http\Controllers\Admin;
+namespace Mabrouk\ProjectSetting\Http\Controllers\Backend;
 
 use Mabrouk\ProjectSetting\Filters\Backend\ProjectSettingGroupFilter;
 use Mabrouk\ProjectSetting\Http\Controllers\Controller;
