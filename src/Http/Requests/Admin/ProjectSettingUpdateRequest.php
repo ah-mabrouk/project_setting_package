@@ -27,10 +27,10 @@ class ProjectSettingUpdateRequest extends FormRequest
     public function rules()
     {
         return \array_merge([
-            'section' => 'sometimes|integer|exists:project_setting_sections,id',
+            // 'section' => 'sometimes|integer|exists:project_setting_sections,id',
 
-            'name' => 'sometimes|string|min:2|max:191',
-            'description' => 'sometimes|string|min:2|max:191',
+            // 'name' => 'sometimes|string|min:2|max:191',
+            // 'description' => 'sometimes|string|min:2|max:191',
 
             'displayed' => [
                 'sometimes', 
@@ -60,7 +60,7 @@ class ProjectSettingUpdateRequest extends FormRequest
     {
         DB::transaction(function () {
             $this->project_setting->update([
-                'project_setting_section_id' => $this->exists('section') ? $this->section : $this->project_setting->project_setting_section_id,
+                // 'project_setting_section_id' => $this->exists('section') ? $this->section : $this->project_setting->project_setting_section_id,
                 'non_translatable_value' => $this->exists('value') && (! $this->project_setting->isTranslatable) ? $this->value : $this->project_setting->non_translatable_value,
 
                 'is_displayed' => $this->exists('displayed') ? $this->displayed : $this->project_setting->is_displayed,
