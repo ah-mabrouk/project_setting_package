@@ -8,8 +8,6 @@ use Mabrouk\ProjectSetting\Models\ProjectSettingGroup;
 
 class ProjectSettingGroupStoreRequest extends FormRequest
 {
-    public ProjectSettingGroup $projectSettingGroup;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,12 +35,13 @@ class ProjectSettingGroupStoreRequest extends FormRequest
 
     public function storeProjectSettingGroup()
     {
-        DB::transaction(function () {
-            $this->projectSettingGroup = ProjectSettingGroup::create([
+        return DB::transaction(function () {
+            $projectSettingGroup = ProjectSettingGroup::create([
                 'slug' => $this->slug,
             ]);
+
+            return $projectSettingGroup->refresh();
         });
-        return $this->projectSettingGroup->refresh();
     }
 
     public function attributes(): array
