@@ -16,7 +16,7 @@ Route::group([
     ]
 ], function () {
     Route::apiResource('project-setting-types', ProjectSettingTypeController::class)->only(['index', 'show']);
-    Route::apiResource('project-setting-groups', ProjectSettingGroupController::class);
-    Route::apiResource('project-setting-groups.project-setting-sections', ProjectSettingSectionController::class)->scoped();
+    Route::apiResource('project-setting-groups', ProjectSettingGroupController::class)->only(['index', 'show']);
+    Route::apiResource('project-setting-groups.project-setting-sections', ProjectSettingSectionController::class)->only(['index', 'show'])->scoped();
     Route::apiResource('project-setting-groups.project-setting-sections.project-settings', ProjectSettingController::class)->except(['store', 'destroy'])->scoped();
 });
