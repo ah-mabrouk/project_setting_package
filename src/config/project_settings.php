@@ -93,4 +93,28 @@ return [
     |
     */
     'load_routes' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Prefix
+    |--------------------------------------------------------------------------
+    |
+    | For multi-tenant apps, cache keys should be tenant-aware. Provide a
+    | string literal prefix here (e.g. 'tenant-123', 'acme.com', etc.).
+    | The final cache key will be "{cache_prefix}:{cache_key_base}".
+    |
+    | Leave null or empty to disable tenant prefixing.
+    */
+    'cache_prefix' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache key base
+    |--------------------------------------------------------------------------
+    |
+    | The base portion for project settings cache keys. The final cache key will
+    | be composed as: "{cache_prefix}:{base}" when cache_prefix is set,
+    | otherwise it will be simply "{base}".
+    */
+    'cache_key_base' => 'project_settings',
 ];

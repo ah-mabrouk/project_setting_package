@@ -133,20 +133,34 @@ class ProjectSetting extends Model
 
     ## Other Methods
 
+    public static function cacheKey(): string
+    {
+        $base = config('project_settings.cache_key_base', 'project_settings');
+        $prefix = config('project_settings.cache_prefix');
+
+        if (!is_string($prefix) || trim($prefix) === '') {
+            return $base;
+        }
+
+        return trim($prefix) . $base;
+    }
+
     public static function cache(bool $force = false)
     {
+        $cacheKey = self::cacheKey();
         if ($force) {
             self::forgetCache();
-            Cache::rememberForever('project_settings', function () {
+            Cache::rememberForever($cacheKey, function () {
                 return self::with('translations', 'phone', 'media')->get();
             });
         }
-        return Cache::has('project_settings') ? Cache::get('project_settings') : self::cache(true);
+
+        return Cache::has($cacheKey) ? Cache::get($cacheKey) : self::cache(true);
     }
 
     public static function forgetCache(): void
     {
-        Cache::forget('project_settings');
+        Cache::forget(self::cacheKey());
     }
 
     public static function key($key, ?string $locale = null, bool $asInt = false, bool $withoutTags = true)
