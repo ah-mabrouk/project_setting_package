@@ -22,6 +22,11 @@ class ProjectSettingTypesTableSeeder extends Seeder
                 'is_translatable' => true,
             ],
             [
+                'name' => 'string-non-translatable',
+                'validation_rules' => 'sometimes|string|min:2|max:255',
+                'is_translatable' => false,
+            ],
+            [
                 'name' => 'text',
                 'validation_rules' => 'sometimes|string|min:2|max:40000',
                 'is_translatable' => true,
