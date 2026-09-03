@@ -46,13 +46,6 @@ class ProjectSettingPhone extends Model
         $this->attributes['country_code'] = Str::contains($value, '+') ? \str_replace('+', '00', $value) : $value;
     }
 
-    public function setNumberAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['number'] = (int) $value;
-        }
-    }
-
     ## Scopes
 
     public function scopeOfData($query, array $phoneData = [])
