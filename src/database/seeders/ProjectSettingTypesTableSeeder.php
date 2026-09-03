@@ -51,7 +51,7 @@ class ProjectSettingTypesTableSeeder extends Seeder
                 'validation_rules' => json_encode([
                     'phone' => 'sometimes|array',
                     'phone.country_code' => 'required_with:phone|string|exists:countries,phone_code',
-                    'phone.number' => 'required_with:phone|numeric|digits_between:9,15',
+                    'phone.number' => 'required_with:phone|numeric|digits_between:4,17',
                 ]),
                 'is_translatable' => false,
             ],
